@@ -1,6 +1,7 @@
 /**
  * AI Web Scraper Engine — Target Platforms & Live Aggregate Dataset
  * 
+<<<<<<< HEAD
  * Supported Platforms:
  * 1. Devpost (devpost.com)
  * 2. Devfolio (devfolio.co)
@@ -16,6 +17,36 @@
  */
 
 export const SCRAPER_PLATFORMS = [
+=======
+ * 1. Competitive Hackathon Platforms (11 Platforms):
+ *    - Devpost (devpost.com)
+ *    - Devfolio (devfolio.co)
+ *    - HackerEarth (hackerearth.com)
+ *    - Unstop (unstop.com)
+ *    - Reskill / Reskilll (reskilll.com)
+ *    - Hack2Skill (hack2skill.com)
+ *    - MLH - Major League Hacking (mlh.io)
+ *    - HeroX (herox.com)
+ *    - Brightidea (brightidea.com)
+ *    - BeMyApp (bemyapp.com)
+ *    - StackUp (stackup.dev)
+ * 
+ * 2. Tech Event, Summit & Community Platforms (11 Platforms):
+ *    - Jamao (jamao.in)
+ *    - Luma (lu.ma)
+ *    - Eventbrite (eventbrite.com)
+ *    - AllEvents (allevents.in)
+ *    - Maidan (maidan.app)
+ *    - TechMeetups (techmeetups.com)
+ *    - StartupMelas (startupmelas.com)
+ *    - EventIndia (eventindia.in)
+ *    - GDG Chennai (gdg.community.dev/gdg-chennai)
+ *    - DevFest Chennai (devfestchennai.com)
+ *    - Bengaluru Tech Week (bengalurutechweek.com)
+ */
+
+export const HACKATHON_PLATFORMS = [
+>>>>>>> 643a550 (supabase integration)
   {
     id: 'devpost',
     name: 'Devpost',
@@ -23,10 +54,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://devpost.com/hackathons',
     endpoint: '/api/v1/hackathons/explore',
     category: 'Global Hackathon Registry',
+<<<<<<< HEAD
     tagline: 'World\'s largest open developer hackathon platform',
     color: '#0086bf',
     badgeBg: 'rgba(0, 134, 191, 0.15)',
     badgeBorder: 'rgba(0, 134, 191, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'World\'s largest open developer hackathon platform',
+    color: '#0086bf',
+    badgeBg: 'rgba(0, 134, 191, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'globe',
     rateLimit: '30 req/min',
     protocol: 'REST / DOM Parser',
@@ -39,10 +77,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://devfolio.co/hackathons',
     endpoint: '/api/hackathons?filter=open',
     category: 'Web3 & Developer Community',
+<<<<<<< HEAD
     tagline: 'Premier host for ETHIndia, Web3 & university jams',
     color: '#3770ff',
     badgeBg: 'rgba(55, 112, 255, 0.15)',
     badgeBorder: 'rgba(55, 112, 255, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Premier host for ETHIndia, Web3 & university jams',
+    color: '#3770ff',
+    badgeBg: 'rgba(55, 112, 255, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'layers',
     rateLimit: '45 req/min',
     protocol: 'GraphQL API',
@@ -55,10 +100,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://www.hackerearth.com/challenges/hackathon/',
     endpoint: '/api/events/hackathons/active',
     category: 'Enterprise & Algorithmic Jams',
+<<<<<<< HEAD
     tagline: 'Global enterprise coding & AI innovation challenges',
     color: '#2b3658',
     badgeBg: 'rgba(99, 102, 241, 0.15)',
     badgeBorder: 'rgba(99, 102, 241, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Global enterprise coding & AI innovation challenges',
+    color: '#2b3658',
+    badgeBg: 'rgba(99, 102, 241, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'cpu',
     rateLimit: '25 req/min',
     protocol: 'REST / JSON Feed',
@@ -71,10 +123,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://unstop.com/hackathons',
     endpoint: '/api/public/opportunity/pl/hackathons',
     category: 'Campus & Global Tech Competitions',
+<<<<<<< HEAD
     tagline: 'Massive engineering, AI and hiring hackathons',
     color: '#1c4980',
     badgeBg: 'rgba(28, 73, 128, 0.18)',
     badgeBorder: 'rgba(28, 73, 128, 0.4)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Massive engineering, AI and hiring hackathons',
+    color: '#1c4980',
+    badgeBg: 'rgba(28, 73, 128, 0.18)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'award',
     rateLimit: '60 req/min',
     protocol: 'Public Search API',
@@ -87,10 +146,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://reskilll.com/events',
     endpoint: '/v1/events/active/tech-hackathons',
     category: 'AI & Cloud Builder Challenges',
+<<<<<<< HEAD
     tagline: 'Microsoft Azure, Google Cloud & Tech Community hackathons',
     color: '#059669',
     badgeBg: 'rgba(5, 150, 105, 0.15)',
     badgeBorder: 'rgba(5, 150, 105, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Microsoft Azure, Google Cloud & Tech Community hackathons',
+    color: '#059669',
+    badgeBg: 'rgba(5, 150, 105, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'sparkles',
     rateLimit: '30 req/min',
     protocol: 'REST Webhook Stream',
@@ -103,10 +169,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://hack2skill.com/challenges',
     endpoint: '/api/challenges/feed?status=ongoing',
     category: 'Emerging Tech & GovTech Sprints',
+<<<<<<< HEAD
     tagline: 'National innovation hackathons & deeptech challenges',
     color: '#8b5cf6',
     badgeBg: 'rgba(139, 92, 246, 0.15)',
     badgeBorder: 'rgba(139, 92, 246, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'National innovation hackathons & deeptech challenges',
+    color: '#8b5cf6',
+    badgeBg: 'rgba(139, 92, 246, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'target',
     rateLimit: '20 req/min',
     protocol: 'JSON WebSocket Feeds',
@@ -119,10 +192,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://mlh.io/seasons/2026/events',
     endpoint: '/api/v3/seasons/2026/events',
     category: 'Major League Hacking Season',
+<<<<<<< HEAD
     tagline: 'Official collegiate hackathon league globally',
     color: '#e73427',
     badgeBg: 'rgba(231, 52, 39, 0.15)',
     badgeBorder: 'rgba(231, 52, 39, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Official collegiate hackathon league globally',
+    color: '#e73427',
+    badgeBg: 'rgba(231, 52, 39, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'flame',
     rateLimit: '50 req/min',
     protocol: 'Season Calendar API',
@@ -135,10 +215,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://www.herox.com/crowdsourcing-projects',
     endpoint: '/api/challenges/active?category=technology',
     category: 'Moonshots & Crowdsourced R&D',
+<<<<<<< HEAD
     tagline: 'NASA, DARPA, and breakthrough prize competitions',
     color: '#ea580c',
     badgeBg: 'rgba(234, 88, 12, 0.15)',
     badgeBorder: 'rgba(234, 88, 12, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'NASA, DARPA, and breakthrough prize competitions',
+    color: '#ea580c',
+    badgeBg: 'rgba(234, 88, 12, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'trophy',
     rateLimit: '15 req/min',
     protocol: 'Crowdsourcing API',
@@ -151,10 +238,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://www.brightidea.com/innovation-challenges',
     endpoint: '/api/initiatives/public/hackathons',
     category: 'Enterprise Open Innovation',
+<<<<<<< HEAD
     tagline: 'Fortune 500 corporate hackathons & design jams',
     color: '#ca8a04',
     badgeBg: 'rgba(202, 138, 4, 0.15)',
     badgeBorder: 'rgba(202, 138, 4, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Fortune 500 corporate hackathons & design jams',
+    color: '#ca8a04',
+    badgeBg: 'rgba(202, 138, 4, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'zap',
     rateLimit: '20 req/min',
     protocol: 'Enterprise API',
@@ -167,10 +261,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://bemyapp.com/events',
     endpoint: '/api/v2/hackathons/public',
     category: 'Automotive & Developer Summits',
+<<<<<<< HEAD
     tagline: 'Global developer relations hackathons and incubators',
     color: '#db2777',
     badgeBg: 'rgba(219, 39, 119, 0.15)',
     badgeBorder: 'rgba(219, 39, 119, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Global developer relations hackathons and incubators',
+    color: '#db2777',
+    badgeBg: 'rgba(219, 39, 119, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'activity',
     rateLimit: '20 req/min',
     protocol: 'Events API',
@@ -183,10 +284,17 @@ export const SCRAPER_PLATFORMS = [
     baseUrl: 'https://stackup.dev/campaigns',
     endpoint: '/api/v1/campaigns/active-quests',
     category: 'Web3 Learn-and-Earn Quests',
+<<<<<<< HEAD
     tagline: 'Developer bounties, quests, and crypto build sprints',
     color: '#0891b2',
     badgeBg: 'rgba(8, 145, 178, 0.15)',
     badgeBorder: 'rgba(8, 145, 178, 0.35)',
+=======
+    targetType: 'hackathon',
+    tagline: 'Developer bounties, quests, and crypto build sprints',
+    color: '#0891b2',
+    badgeBg: 'rgba(8, 145, 178, 0.15)',
+>>>>>>> 643a550 (supabase integration)
     icon: 'terminal',
     rateLimit: '35 req/min',
     protocol: 'Web3 Quest Stream',
@@ -194,10 +302,205 @@ export const SCRAPER_PLATFORMS = [
   }
 ];
 
+<<<<<<< HEAD
 /**
  * Discoverable Events Dataset mapped to the 11 Scraper Platforms
  */
 export const DISCOVERABLE_EVENTS = [
+=======
+export const TECH_EVENT_PLATFORMS = [
+  {
+    id: 'jamao',
+    name: 'Jamao',
+    domain: 'jamao.in',
+    baseUrl: 'https://jamao.in/tech-events',
+    endpoint: '/api/v1/meetups/explore',
+    category: 'Developer Meetups & Communities',
+    targetType: 'tech-event',
+    tagline: 'India\'s vibrant tech meetups, AI circles & developer communities',
+    color: '#ea580c',
+    badgeBg: 'rgba(234, 88, 12, 0.15)',
+    icon: 'radio',
+    rateLimit: '30 req/min',
+    protocol: 'REST API / Event Stream',
+    enabled: true
+  },
+  {
+    id: 'luma',
+    name: 'Luma',
+    domain: 'lu.ma',
+    baseUrl: 'https://lu.ma/discover',
+    endpoint: '/api/v1/calendar/discover-events',
+    category: 'Tech Talks & Demo Days',
+    targetType: 'tech-event',
+    tagline: 'Curated AI demo days, founder salons & global dev gatherings',
+    color: '#ec4899',
+    badgeBg: 'rgba(236, 72, 153, 0.15)',
+    icon: 'sparkles',
+    rateLimit: '45 req/min',
+    protocol: 'GraphQL / JSON',
+    enabled: true
+  },
+  {
+    id: 'eventbrite',
+    name: 'Eventbrite',
+    domain: 'eventbrite.com',
+    baseUrl: 'https://www.eventbrite.com/d/online/science-and-tech--events/',
+    endpoint: '/api/v3/destination/search',
+    category: 'Global Tech Conferences & Summits',
+    targetType: 'tech-event',
+    tagline: 'International developer conferences, technical summits & workshops',
+    color: '#f05537',
+    badgeBg: 'rgba(240, 85, 55, 0.15)',
+    icon: 'calendar',
+    rateLimit: '50 req/min',
+    protocol: 'Eventbrite v3 API',
+    enabled: true
+  },
+  {
+    id: 'allevents',
+    name: 'AllEvents',
+    domain: 'allevents.in',
+    baseUrl: 'https://allevents.in/tech',
+    endpoint: '/api/index.php/events/list',
+    category: 'Tech Webinars & Bootcamps',
+    targetType: 'tech-event',
+    tagline: 'Discover coding workshops, webinars & regional developer days',
+    color: '#2563eb',
+    badgeBg: 'rgba(37, 99, 235, 0.15)',
+    icon: 'globe',
+    rateLimit: '40 req/min',
+    protocol: 'REST API',
+    enabled: true
+  },
+  {
+    id: 'maidan',
+    name: 'Maidan',
+    domain: 'maidan.app',
+    baseUrl: 'https://maidan.app/events',
+    endpoint: '/api/v1/gatherings/feed',
+    category: 'Developer Unconferences & Jams',
+    targetType: 'tech-event',
+    tagline: 'Grassroots builder spaces, co-working build sprints & unconferences',
+    color: '#10b981',
+    badgeBg: 'rgba(16, 185, 129, 0.15)',
+    icon: 'target',
+    rateLimit: '25 req/min',
+    protocol: 'WebSocket / JSON',
+    enabled: true
+  },
+  {
+    id: 'techmeetups',
+    name: 'TechMeetups',
+    domain: 'techmeetups.com',
+    baseUrl: 'https://techmeetups.com/events',
+    endpoint: '/api/events/calendar',
+    category: 'Global Tech Networking & Job Fairs',
+    targetType: 'tech-event',
+    tagline: 'Premier tech fairs in London, Berlin, New York & Singapore',
+    color: '#8b5cf6',
+    badgeBg: 'rgba(139, 92, 246, 0.15)',
+    icon: 'activity',
+    rateLimit: '20 req/min',
+    protocol: 'REST / HTML Crawler',
+    enabled: true
+  },
+  {
+    id: 'startupmelas',
+    name: 'StartupMelas',
+    domain: 'startupmelas.com',
+    baseUrl: 'https://startupmelas.com/events',
+    endpoint: '/api/v1/melas/active',
+    category: 'Startup Expos & Founder Conclaves',
+    targetType: 'tech-event',
+    tagline: 'Founder-engineer matchmaking, demo pavilions & angel pitch fests',
+    color: '#eab308',
+    badgeBg: 'rgba(234, 179, 8, 0.15)',
+    icon: 'trophy',
+    rateLimit: '20 req/min',
+    protocol: 'REST Feed',
+    enabled: true
+  },
+  {
+    id: 'eventindia',
+    name: 'EventIndia',
+    domain: 'eventindia.in',
+    baseUrl: 'https://eventindia.in/technology',
+    endpoint: '/api/tech-summits/national',
+    category: 'National Tech Summits & CIO Expos',
+    targetType: 'tech-event',
+    tagline: 'Pan-India enterprise tech conventions, AI summits & cloud summits',
+    color: '#0284c7',
+    badgeBg: 'rgba(2, 132, 199, 0.15)',
+    icon: 'map',
+    rateLimit: '25 req/min',
+    protocol: 'JSON Stream',
+    enabled: true
+  },
+  {
+    id: 'gdg-chennai',
+    name: 'GDG Chennai',
+    domain: 'gdg.community.dev/gdg-chennai',
+    baseUrl: 'https://gdg.community.dev/gdg-chennai/',
+    endpoint: '/api/chapter/gdg-chennai/events',
+    category: 'Google Developer Group Chennai',
+    targetType: 'tech-event',
+    tagline: 'Google Cloud, Android, Flutter, TensorFlow & GenAI developer talks in Chennai',
+    color: '#ea4335',
+    badgeBg: 'rgba(234, 67, 53, 0.15)',
+    icon: 'cpu',
+    rateLimit: '30 req/min',
+    protocol: 'GDG Bevy API',
+    enabled: true
+  },
+  {
+    id: 'devfest-chennai',
+    name: 'DevFest Chennai',
+    domain: 'devfestchennai.com',
+    baseUrl: 'https://devfestchennai.com',
+    endpoint: '/api/v1/schedule',
+    category: 'DevFest Annual Flagship Conference',
+    targetType: 'tech-event',
+    tagline: 'Chennai\'s biggest annual developer conference by Google Developer Groups',
+    color: '#4285f4',
+    badgeBg: 'rgba(66, 133, 244, 0.15)',
+    icon: 'flame',
+    rateLimit: '30 req/min',
+    protocol: 'Conference API / Live Sync',
+    enabled: true
+  },
+  {
+    id: 'bengaluru-tech-week',
+    name: 'Bengaluru Tech Week',
+    domain: 'bengalurutechweek.com',
+    baseUrl: 'https://bengalurutechweek.com',
+    endpoint: '/api/v1/schedule/sessions',
+    category: 'Flagship Innovation & DeepTech Summit',
+    targetType: 'tech-event',
+    tagline: 'Asia\'s largest tech festival, founder unconferences & deeptech conclaves in Bengaluru',
+    color: '#059669',
+    badgeBg: 'rgba(5, 150, 105, 0.15)',
+    icon: 'zap',
+    rateLimit: '35 req/min',
+    protocol: 'Summit Feed',
+    enabled: true
+  }
+];
+
+export const SCRAPER_PLATFORMS = [
+  ...HACKATHON_PLATFORMS,
+  ...TECH_EVENT_PLATFORMS
+];
+
+/**
+ * Discoverable Events Dataset mapped to all 22 Scraper Platforms
+ */
+export const DISCOVERABLE_EVENTS = [
+  // ==========================================
+  // HACKATHON PLATFORMS (1-11)
+  // ==========================================
+
+>>>>>>> 643a550 (supabase integration)
   // 1. Devpost
   {
     id: "scraped-devpost-1",
@@ -352,7 +655,11 @@ export const DISCOVERABLE_EVENTS = [
     category: "IoT",
     mode: "Hybrid",
     location: "Mumbai, India & Online",
+<<<<<<< HEAD
     city: "Bengaluru",
+=======
+    city: "Mumbai",
+>>>>>>> 643a550 (supabase integration)
     country: "India",
     registrationDeadline: "2026-11-05",
     eventStartDate: "2026-11-15",
@@ -448,7 +755,11 @@ export const DISCOVERABLE_EVENTS = [
     category: "Cybersecurity",
     mode: "Hybrid",
     location: "New Delhi, India & Online",
+<<<<<<< HEAD
     city: "Bengaluru",
+=======
+    city: "Delhi",
+>>>>>>> 643a550 (supabase integration)
     country: "India",
     registrationDeadline: "2026-10-31",
     eventStartDate: "2026-11-06",
@@ -724,18 +1035,565 @@ export const DISCOVERABLE_EVENTS = [
     source: "StackUp Quest Stream",
     discoveredAt: "2026-10-03",
     prizePool: "$20,000"
+<<<<<<< HEAD
+=======
+  },
+
+  // ==========================================
+  // TECH EVENT PLATFORMS (12-22)
+  // ==========================================
+
+  // 12. Jamao (jamao.in)
+  {
+    id: "scraped-jamao-1",
+    title: "Chennai AI Engineers & LLM Practitioners Meetup",
+    type: "tech-event",
+    description: "Technical talks on agent evaluation harnesses, DSPy prompt compilation, and local on-device small language model (SLM) quantization.",
+    organizer: "Jamao AI Community Chennai",
+    category: "AI/ML",
+    mode: "Offline",
+    location: "Guindy Tech Corridor, Chennai, Tamil Nadu, India",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-10-26",
+    eventStartDate: "2026-10-30",
+    eventEndDate: "2026-10-30",
+    registrationUrl: "https://jamao.in/chennai-ai-engineers",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "jamao",
+    platformName: "Jamao",
+    source: "Jamao Tech Meetups Feed",
+    discoveredAt: "2026-10-03",
+    eventType: "Developer Meetup & Tech Talks"
+  },
+  {
+    id: "scraped-jamao-2",
+    title: "Bengaluru Rust & Systems Architecture Circle",
+    type: "tech-event",
+    description: "Deep dive into memory safety without garbage collection, Tokio asynchronous runtime internals, and SIMD optimizations in Rust.",
+    organizer: "Jamao Rust Guild",
+    category: "Open Innovation",
+    mode: "Offline",
+    location: "Koramangala, Bengaluru, Karnataka, India",
+    city: "Bengaluru",
+    country: "India",
+    registrationDeadline: "2026-11-04",
+    eventStartDate: "2026-11-09",
+    eventEndDate: "2026-11-09",
+    registrationUrl: "https://jamao.in/bengaluru-rust-circle",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "jamao",
+    platformName: "Jamao",
+    source: "Jamao Tech Meetups Feed",
+    discoveredAt: "2026-10-03",
+    eventType: "Systems Meetup"
+  },
+
+  // 13. Luma (lu.ma)
+  {
+    id: "scraped-luma-1",
+    title: "San Francisco GenAI Founders & Builders Demo Night",
+    type: "tech-event",
+    description: "Exclusive demo night featuring live technical showcases of multimodal agent architectures, diffusion models, and code generation engines.",
+    organizer: "Luma AI Collective SF",
+    category: "AI/ML",
+    mode: "Offline",
+    location: "Mission District, San Francisco, CA, USA",
+    city: "San Francisco",
+    country: "USA",
+    registrationDeadline: "2026-10-22",
+    eventStartDate: "2026-10-28",
+    eventEndDate: "2026-10-28",
+    registrationUrl: "https://lu.ma/sf-genai-demo-night",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "luma",
+    platformName: "Luma",
+    source: "Luma Live Calendar API",
+    discoveredAt: "2026-10-03",
+    eventType: "Demo Night & Networking"
+  },
+  {
+    id: "scraped-luma-2",
+    title: "London Physical AI & Embodied Robotics Salon",
+    type: "tech-event",
+    description: "Gathering of roboticists, computer vision researchers, and hardware architects discussing reinforcement learning for robotic manipulation.",
+    organizer: "Luma Tech Salon London",
+    category: "IoT",
+    mode: "Offline",
+    location: "Shoreditch, London, United Kingdom",
+    city: "London",
+    country: "United Kingdom",
+    registrationDeadline: "2026-11-02",
+    eventStartDate: "2026-11-08",
+    eventEndDate: "2026-11-08",
+    registrationUrl: "https://lu.ma/london-embodied-robotics",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "luma",
+    platformName: "Luma",
+    source: "Luma Live Calendar API",
+    discoveredAt: "2026-10-03",
+    eventType: "Tech Salon"
+  },
+
+  // 14. Eventbrite (eventbrite.com)
+  {
+    id: "scraped-eventbrite-1",
+    title: "Global CloudNative & Kubernetes World Summit 2026",
+    type: "tech-event",
+    description: "3-day technical conference on eBPF networking, service mesh traffic topologies, GitOps at scale, and multicluster orchestration.",
+    organizer: "CloudNative Global Foundation (Eventbrite)",
+    category: "Cloud",
+    mode: "Online",
+    location: "Online (Global Virtual Stage)",
+    city: "Online",
+    country: "Global",
+    registrationDeadline: "2026-11-10",
+    eventStartDate: "2026-11-18",
+    eventEndDate: "2026-11-20",
+    registrationUrl: "https://www.eventbrite.com/e/cloudnative-world-summit-2026",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "eventbrite",
+    platformName: "Eventbrite",
+    source: "Eventbrite Tech Feed",
+    discoveredAt: "2026-10-03",
+    eventType: "Global Technical Summit"
+  },
+  {
+    id: "scraped-eventbrite-2",
+    title: "Silicon Valley DeepTech & Quantum Computing Expo",
+    type: "tech-event",
+    description: "Showcase of quantum hardware cryostats, photonic computing chipsets, and industrial quantum chemistry simulation software.",
+    organizer: "SV DeepTech Forum (Eventbrite)",
+    category: "AI/ML",
+    mode: "Offline",
+    location: "Santa Clara Convention Center, Silicon Valley, CA, USA",
+    city: "San Francisco",
+    country: "USA",
+    registrationDeadline: "2026-11-15",
+    eventStartDate: "2026-11-24",
+    eventEndDate: "2026-11-26",
+    registrationUrl: "https://www.eventbrite.com/e/sv-deeptech-quantum-expo",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "eventbrite",
+    platformName: "Eventbrite",
+    source: "Eventbrite Tech Feed",
+    discoveredAt: "2026-10-03",
+    eventType: "Conference & Expo"
+  },
+
+  // 15. AllEvents (allevents.in)
+  {
+    id: "scraped-allevents-1",
+    title: "AllEvents Worldwide Web3 Security & Auditing Masterclass",
+    type: "tech-event",
+    description: "Hands-on masterclass on smart contract formal verification, fuzz testing with Foundry, and reentrancy attack mitigation.",
+    organizer: "Blockchain Security Guild (AllEvents)",
+    category: "Blockchain",
+    mode: "Online",
+    location: "Online (Global Virtual Classroom)",
+    city: "Online",
+    country: "Global",
+    registrationDeadline: "2026-10-27",
+    eventStartDate: "2026-11-03",
+    eventEndDate: "2026-11-04",
+    registrationUrl: "https://allevents.in/online/web3-security-masterclass",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "allevents",
+    platformName: "AllEvents",
+    source: "AllEvents Crawler",
+    discoveredAt: "2026-10-03",
+    eventType: "Technical Masterclass"
+  },
+  {
+    id: "scraped-allevents-2",
+    title: "Tokyo IoT & Microcontrollers Developer Day (AllEvents)",
+    type: "tech-event",
+    description: "Hardware hacking sessions, ESP32 and RISC-V edge computing workshops, and sensor telemetry firmware design.",
+    organizer: "Tokyo Hardware Hackers (AllEvents)",
+    category: "IoT",
+    mode: "Hybrid",
+    location: "Akihabara, Tokyo, Japan & Online",
+    city: "Tokyo",
+    country: "Japan",
+    registrationDeadline: "2026-11-12",
+    eventStartDate: "2026-11-21",
+    eventEndDate: "2026-11-22",
+    registrationUrl: "https://allevents.in/tokyo/iot-developer-day",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "allevents",
+    platformName: "AllEvents",
+    source: "AllEvents Crawler",
+    discoveredAt: "2026-10-03",
+    eventType: "Workshop & Hack Day"
+  },
+
+  // 16. Maidan (maidan.app)
+  {
+    id: "scraped-maidan-1",
+    title: "Maidan Chennai Open Source & Linux Kernel Unconference",
+    type: "tech-event",
+    description: "Unconference style lightning talks on Linux kernel patch submission, eBPF probes, custom embedded distributions, and FOSS tooling.",
+    organizer: "Maidan Chennai Community",
+    category: "Open Innovation",
+    mode: "Offline",
+    location: "IIT Madras Research Park, Chennai, Tamil Nadu, India",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-10-25",
+    eventStartDate: "2026-10-31",
+    eventEndDate: "2026-10-31",
+    registrationUrl: "https://maidan.app/events/chennai-kernel-unconf",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "maidan",
+    platformName: "Maidan",
+    source: "Maidan Gathering Stream",
+    discoveredAt: "2026-10-03",
+    eventType: "Unconference & Build Jam"
+  },
+  {
+    id: "scraped-maidan-2",
+    title: "Bengaluru AI Hardware & Edge Acceleration Sprint (Maidan)",
+    type: "tech-event",
+    description: "Collaborative prototyping weekend focused on running quantized LLMs on Raspberry Pi 5, Hailo AI accelerators, and Jetson Orin boards.",
+    organizer: "Maidan Edge AI Club",
+    category: "AI/ML",
+    mode: "Offline",
+    location: "Indiranagar, Bengaluru, Karnataka, India",
+    city: "Bengaluru",
+    country: "India",
+    registrationDeadline: "2026-11-06",
+    eventStartDate: "2026-11-14",
+    eventEndDate: "2026-11-15",
+    registrationUrl: "https://maidan.app/events/bengaluru-edge-ai-sprint",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "maidan",
+    platformName: "Maidan",
+    source: "Maidan Gathering Stream",
+    discoveredAt: "2026-10-03",
+    eventType: "Hardware Jam"
+  },
+
+  // 17. TechMeetups (techmeetups.com)
+  {
+    id: "scraped-techmeetups-1",
+    title: "TechMeetups Berlin Tech Career & Developer Networking Expo",
+    type: "tech-event",
+    description: "Connect with 80+ engineering teams, high-growth European tech scale-ups, and open-source foundations hiring distributed software engineers.",
+    organizer: "TechMeetups Europe",
+    category: "Web Development",
+    mode: "Offline",
+    location: "Alexanderplatz, Berlin, Germany",
+    city: "Berlin",
+    country: "Germany",
+    registrationDeadline: "2026-11-05",
+    eventStartDate: "2026-11-12",
+    eventEndDate: "2026-11-13",
+    registrationUrl: "https://techmeetups.com/events/berlin-tech-expo-2026",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "techmeetups",
+    platformName: "TechMeetups",
+    source: "TechMeetups Global Feeds",
+    discoveredAt: "2026-10-03",
+    eventType: "Tech Expo & Job Conclave"
+  },
+  {
+    id: "scraped-techmeetups-2",
+    title: "TechMeetups London FinTech & Distributed Systems Gathering",
+    type: "tech-event",
+    description: "Talks on low-latency trading engines in C++, ultra-reliable message queues, and real-time payment reconciliation architectures.",
+    organizer: "TechMeetups London",
+    category: "Cloud",
+    mode: "Offline",
+    location: "Canary Wharf, London, United Kingdom",
+    city: "London",
+    country: "United Kingdom",
+    registrationDeadline: "2026-11-14",
+    eventStartDate: "2026-11-22",
+    eventEndDate: "2026-11-22",
+    registrationUrl: "https://techmeetups.com/events/london-fintech-systems",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "techmeetups",
+    platformName: "TechMeetups",
+    source: "TechMeetups Global Feeds",
+    discoveredAt: "2026-10-03",
+    eventType: "Technical Gathering"
+  },
+
+  // 18. StartupMelas (startupmelas.com)
+  {
+    id: "scraped-startupmelas-1",
+    title: "StartupMelas India Innovation & AI Demo Pavilion 2026",
+    type: "tech-event",
+    description: "High-energy tech demo pavilion where 100+ deeptech, AI, and SaaS startups pitch live working products to developers, CTOs, and angel syndicates.",
+    organizer: "StartupMelas Foundation",
+    category: "AI/ML",
+    mode: "Hybrid",
+    location: "Whitefield, Bengaluru, India & Online",
+    city: "Bengaluru",
+    country: "India",
+    registrationDeadline: "2026-11-08",
+    eventStartDate: "2026-11-17",
+    eventEndDate: "2026-11-18",
+    registrationUrl: "https://startupmelas.com/events/india-innovation-pavilion",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "startupmelas",
+    platformName: "StartupMelas",
+    source: "StartupMelas Network",
+    discoveredAt: "2026-10-03",
+    eventType: "Startup Expo & Demo Pavilion"
+  },
+  {
+    id: "scraped-startupmelas-2",
+    title: "StartupMelas Chennai DeepTech & SaaS Founders Conclave",
+    type: "tech-event",
+    description: "Panel discussions on enterprise B2B sales cycles, SOC2 compliance automation, and scaling cloud workloads cost-effectively.",
+    organizer: "StartupMelas Chennai Chapter",
+    category: "Web Development",
+    mode: "Offline",
+    location: "Tidel Park, OMR, Chennai, Tamil Nadu, India",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-11-16",
+    eventStartDate: "2026-11-25",
+    eventEndDate: "2026-11-25",
+    registrationUrl: "https://startupmelas.com/events/chennai-saas-conclave",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "startupmelas",
+    platformName: "StartupMelas",
+    source: "StartupMelas Network",
+    discoveredAt: "2026-10-03",
+    eventType: "Founders Conclave"
+  },
+
+  // 19. EventIndia (eventindia.in)
+  {
+    id: "scraped-eventindia-1",
+    title: "EventIndia National AI & Cloud Infrastructure Summit",
+    type: "tech-event",
+    description: "National convention featuring keynote addresses by cloud leaders on sovereign AI infrastructure, GPU cluster cooling, and zero-trust security.",
+    organizer: "EventIndia Enterprise Tech",
+    category: "Cloud",
+    mode: "Hybrid",
+    location: "Pragati Maidan, New Delhi, India & Online",
+    city: "Delhi",
+    country: "India",
+    registrationDeadline: "2026-11-01",
+    eventStartDate: "2026-11-10",
+    eventEndDate: "2026-11-12",
+    registrationUrl: "https://eventindia.in/technology/national-ai-cloud-summit",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "eventindia",
+    platformName: "EventIndia",
+    source: "EventIndia Enterprise Crawler",
+    discoveredAt: "2026-10-03",
+    eventType: "National Convention"
+  },
+  {
+    id: "scraped-eventindia-2",
+    title: "EventIndia Future of Mobility & Connected EV Summit",
+    type: "tech-event",
+    description: "Technical symposium on battery management telemetry, telematics CAN-bus analytics, and autonomous driver-assistance computer vision models.",
+    organizer: "EventIndia Automotive Council",
+    category: "IoT",
+    mode: "Offline",
+    location: "Bengaluru International Exhibition Centre (BIEC), Bengaluru, India",
+    city: "Bengaluru",
+    country: "India",
+    registrationDeadline: "2026-11-19",
+    eventStartDate: "2026-11-28",
+    eventEndDate: "2026-11-29",
+    registrationUrl: "https://eventindia.in/technology/future-mobility-ev",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "eventindia",
+    platformName: "EventIndia",
+    source: "EventIndia Enterprise Crawler",
+    discoveredAt: "2026-10-03",
+    eventType: "Automotive Summit"
+  },
+
+  // 20. GDG Chennai (gdg.community.dev/gdg-chennai)
+  {
+    id: "scraped-gdg-chennai-1",
+    title: "GDG Chennai Google I/O Extended & Gemini 1.5 Deep Dive",
+    type: "tech-event",
+    description: "Official Google Developer Group Chennai meetup covering Gemini 1.5 Pro multimodal reasoning, Firebase Studio, and Flutter 3 multiplatform performance.",
+    organizer: "Google Developer Group (GDG) Chennai",
+    category: "AI/ML",
+    mode: "Offline",
+    location: "Chennai, Tamil Nadu, India (Venue: IIT Madras Research Park)",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-10-23",
+    eventStartDate: "2026-10-29",
+    eventEndDate: "2026-10-29",
+    registrationUrl: "https://gdg.community.dev/events/details/developer-group-gdg-chennai-gemini-deepdive/",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "gdg-chennai",
+    platformName: "GDG Chennai",
+    source: "GDG Chennai Bevy Feed",
+    discoveredAt: "2026-10-03",
+    eventType: "Google Community Meetup"
+  },
+  {
+    id: "scraped-gdg-chennai-2",
+    title: "GDG Chennai Cloud & Android Modern Architecture Summit",
+    type: "tech-event",
+    description: "In-depth sessions on Jetpack Compose internals, Kotlin Multiplatform in production, Google Cloud Run microservices, and Vertex AI Search.",
+    organizer: "Google Developer Group (GDG) Chennai",
+    category: "Mobile Development",
+    mode: "Offline",
+    location: "Siruseri IT Park, OMR, Chennai, Tamil Nadu, India",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-11-09",
+    eventStartDate: "2026-11-15",
+    eventEndDate: "2026-11-15",
+    registrationUrl: "https://gdg.community.dev/events/details/developer-group-gdg-chennai-android-summit/",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "gdg-chennai",
+    platformName: "GDG Chennai",
+    source: "GDG Chennai Bevy Feed",
+    discoveredAt: "2026-10-03",
+    eventType: "Technical Summit"
+  },
+
+  // 21. DevFest Chennai (devfestchennai.com)
+  {
+    id: "scraped-devfest-chennai-1",
+    title: "DevFest Chennai 2026 — Annual Flagship Developer Conference",
+    type: "tech-event",
+    description: "Chennai's biggest developer conference! 1,500+ engineers, 30+ international & Google Developer Experts, 4 parallel tracks across AI/ML, Cloud, Web, and Mobile.",
+    organizer: "DevFest Chennai Organizing Committee",
+    category: "AI/ML",
+    mode: "Offline",
+    location: "Chennai Trade Centre, Nandambakkam, Chennai, Tamil Nadu, India",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-11-01",
+    eventStartDate: "2026-11-14",
+    eventEndDate: "2026-11-15",
+    registrationUrl: "https://devfestchennai.com/register",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "devfest-chennai",
+    platformName: "DevFest Chennai",
+    source: "DevFest Chennai Portal Scraper",
+    discoveredAt: "2026-10-03",
+    eventType: "Flagship Annual Conference"
+  },
+  {
+    id: "scraped-devfest-chennai-2",
+    title: "DevFest Chennai Hands-on AI Codelabs & Cloud Jam",
+    type: "tech-event",
+    description: "Dedicated practical codelab sessions building end-to-end RAG pipelines with ChromaDB and fine-tuning open-source LLMs on Google Cloud Vertex AI.",
+    organizer: "DevFest Chennai Community",
+    category: "Cloud",
+    mode: "Offline",
+    location: "Chennai Trade Centre, Chennai, Tamil Nadu, India",
+    city: "Chennai",
+    country: "India",
+    registrationDeadline: "2026-11-05",
+    eventStartDate: "2026-11-16",
+    eventEndDate: "2026-11-16",
+    registrationUrl: "https://devfestchennai.com/codelabs",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "devfest-chennai",
+    platformName: "DevFest Chennai",
+    source: "DevFest Chennai Portal Scraper",
+    discoveredAt: "2026-10-03",
+    eventType: "Hands-on Codelabs"
+  },
+
+  // 22. Bengaluru Tech Week (bengalurutechweek.com)
+  {
+    id: "scraped-bengaluru-tech-week-1",
+    title: "Bengaluru Tech Week 2026 — Asia's Premier DeepTech & Innovation Summit",
+    type: "tech-event",
+    description: "The crown jewel of India's Silicon Valley! 5 days of keynotes, unconferences, developer demo days, and AI summits featuring 5,000+ tech leaders and innovators.",
+    organizer: "Bengaluru Tech Week Innovation Council",
+    category: "Open Innovation",
+    mode: "Offline",
+    location: "Bengaluru Palace & Electronic City Tech Hub, Bengaluru, Karnataka, India",
+    city: "Bengaluru",
+    country: "India",
+    registrationDeadline: "2026-11-07",
+    eventStartDate: "2026-11-23",
+    eventEndDate: "2026-11-27",
+    registrationUrl: "https://bengalurutechweek.com/2026-passes",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "bengaluru-tech-week",
+    platformName: "Bengaluru Tech Week",
+    source: "Bengaluru Tech Week Harvester",
+    discoveredAt: "2026-10-03",
+    eventType: "Premier Technology Festival"
+  },
+  {
+    id: "scraped-bengaluru-tech-week-2",
+    title: "Bengaluru Tech Week Web3 & Decentralized Future Conclave",
+    type: "tech-event",
+    description: "High-throughput blockchain scalability talks, account abstraction workshops, and real-world asset (RWA) tokenization keynotes.",
+    organizer: "Bengaluru Tech Week Web3 Guild",
+    category: "Blockchain",
+    mode: "Offline",
+    location: "Chinnaswamy Convention Arena, Bengaluru, Karnataka, India",
+    city: "Bengaluru",
+    country: "India",
+    registrationDeadline: "2026-11-11",
+    eventStartDate: "2026-11-24",
+    eventEndDate: "2026-11-25",
+    registrationUrl: "https://bengalurutechweek.com/web3-conclave",
+    status: "Not Registered",
+    bookmarked: false,
+    platform: "bengaluru-tech-week",
+    platformName: "Bengaluru Tech Week",
+    source: "Bengaluru Tech Week Harvester",
+    discoveredAt: "2026-10-03",
+    eventType: "Summit Conclave"
+>>>>>>> 643a550 (supabase integration)
   }
 ];
 
 export const POPULAR_LOCATIONS = [
   "All Locations",
   "Online (Global)",
+<<<<<<< HEAD
   "San Francisco, USA",
   "Bengaluru, India",
+=======
+  "Chennai, India",
+  "Bengaluru, India",
+  "San Francisco, USA",
+>>>>>>> 643a550 (supabase integration)
   "London, UK",
   "Tokyo, Japan",
   "Berlin, Germany",
   "Austin, USA",
   "New York, USA",
+<<<<<<< HEAD
   "Singapore"
+=======
+  "Singapore",
+  "Mumbai, India",
+  "Delhi, India"
+>>>>>>> 643a550 (supabase integration)
 ];

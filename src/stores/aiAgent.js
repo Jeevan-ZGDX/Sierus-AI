@@ -7,7 +7,11 @@ const initialLogs = [
   {
     id: 'log-0',
     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+<<<<<<< HEAD
     text: '🤖 AI Scout Agent v2.4 initialized. Ready to scrape 11 developer platforms (Devpost, Devfolio, HackerEarth, Unstop, Reskill, Hack2Skill, MLH, HeroX, Brightidea, BeMyApp, StackUp).',
+=======
+    text: '🤖 AI Scout Agent v2.4 initialized. Ready to scrape 22 platforms: 11 Hackathons (Devpost, Devfolio, HackerEarth, Unstop, Reskill, Hack2Skill, MLH, HeroX, Brightidea, BeMyApp, StackUp) + 11 Tech Event Platforms (Jamao, Luma, Eventbrite, AllEvents, Maidan, TechMeetups, StartupMelas, EventIndia, GDG Chennai, DevFest Chennai, Bengaluru Tech Week).',
+>>>>>>> 643a550 (supabase integration)
     type: 'info'
   }
 ];
@@ -26,7 +30,12 @@ const initialState = {
   progressPercent: 0,
   activePlatformId: null,
   activePlatformName: null,
+<<<<<<< HEAD
   searchPrompt: 'Scrape all active hackathons & tech challenges from 11 platforms',
+=======
+  activePlatformType: null,
+  searchPrompt: 'Scrape all active hackathons, tech summits & developer meetups across 22 platforms',
+>>>>>>> 643a550 (supabase integration)
   lastScanTime: null,
   newlyDiscoveredCount: 0,
   totalScrapedInSession: 0,
@@ -47,7 +56,11 @@ function createAIAgentStore() {
     };
     update(state => ({
       ...state,
+<<<<<<< HEAD
       logs: [logItem, ...state.logs.slice(0, 199)]
+=======
+      logs: [logItem, ...state.logs.slice(0, 249)]
+>>>>>>> 643a550 (supabase integration)
     }));
   }
 
@@ -67,6 +80,18 @@ function createAIAgentStore() {
     }));
   }
 
+<<<<<<< HEAD
+=======
+  function setPlatformsByType(targetType, enabled) {
+    update(s => ({
+      ...s,
+      platforms: s.platforms.map(p =>
+        p.targetType === targetType ? { ...p, enabled } : p
+      )
+    }));
+  }
+
+>>>>>>> 643a550 (supabase integration)
   function updatePlatformStatus(platformId, patch) {
     update(s => ({
       ...s,
@@ -86,36 +111,65 @@ function createAIAgentStore() {
     const platform = currentState.platforms.find(p => p.id === platformId);
     if (!platform) return;
 
+<<<<<<< HEAD
+=======
+    const typeLabel = platform.targetType === 'tech-event' ? 'Tech Event' : 'Hackathon';
+
+>>>>>>> 643a550 (supabase integration)
     update(s => ({
       ...s,
       isScanning: true,
       activePlatformId: platform.id,
       activePlatformName: platform.name,
+<<<<<<< HEAD
+=======
+      activePlatformType: platform.targetType,
+>>>>>>> 643a550 (supabase integration)
       progressPercent: 10,
       agentStatus: `Connecting to ${platform.name} (${platform.domain})...`
     }));
 
+<<<<<<< HEAD
     addLog(`🌐 [${platform.name}] Establishing secure SSL handshake with https://${platform.domain}`, 'info', platform.id);
     updatePlatformStatus(platform.id, { status: 'connecting' });
     await sleep(350);
+=======
+    addLog(`🌐 [${platform.name}] Establishing secure SSL handshake with https://${platform.domain} (${typeLabel} Scraper)`, 'info', platform.id);
+    updatePlatformStatus(platform.id, { status: 'connecting' });
+    await sleep(320);
+>>>>>>> 643a550 (supabase integration)
 
     update(s => ({
       ...s,
       progressPercent: 40,
       agentStatus: `Querying ${platform.name} endpoint: ${platform.endpoint}`
     }));
+<<<<<<< HEAD
     addLog(`📡 [${platform.name}] GET ${platform.endpoint} -> Parsing response body & HTML schemas...`, 'info', platform.id);
     updatePlatformStatus(platform.id, { status: 'crawling' });
     await sleep(400);
+=======
+    addLog(`📡 [${platform.name}] GET ${platform.endpoint} -> Parsing response body & DOM schema (${platform.protocol})...`, 'info', platform.id);
+    updatePlatformStatus(platform.id, { status: 'crawling' });
+    await sleep(380);
+>>>>>>> 643a550 (supabase integration)
 
     update(s => ({
       ...s,
       progressPercent: 75,
+<<<<<<< HEAD
       agentStatus: `Extracting prize tracks & dates from ${platform.name}...`
     }));
     addLog(`⚡ [${platform.name}] NLP extractor parsed event metadata, prize pools, and deadline countdowns.`, 'info', platform.id);
     updatePlatformStatus(platform.id, { status: 'extracting' });
     await sleep(350);
+=======
+      agentStatus: `Extracting ${typeLabel} metadata, dates & locations from ${platform.name}...`
+    }));
+    addLog(`⚡ [${platform.name}] NLP extractor parsed schedules, venues (${platform.tagline}), and registration links.`, 'info', platform.id);
+    updatePlatformStatus(platform.id, { status: 'extracting' });
+    await sleep(320);
+>>>>>>> 643a550 (supabase integration)
 
     // Ingest events belonging to this platform
     const currentList = get(hackathons);
@@ -142,10 +196,17 @@ function createAIAgentStore() {
 
     if (newItems.length > 0) {
       newItems.forEach(item => hackathons.addHackathon(item));
+<<<<<<< HEAD
       addLog(`✨ [${platform.name}] Ingested ${addedCount} new hackathon(s) into database.`, 'success', platform.id);
       toasts.success(`🤖 ${platform.name} Scraper: Discovered ${addedCount} new event(s)!`);
     } else {
       addLog(`✅ [${platform.name}] Scan completed. 0 new items (Already synchronized).`, 'info', platform.id);
+=======
+      addLog(`✨ [${platform.name}] Ingested ${addedCount} new ${typeLabel.toLowerCase()}(s) into database.`, 'success', platform.id);
+      toasts.success(`🤖 ${platform.name} Scraper: Discovered ${addedCount} new ${typeLabel.toLowerCase()}(s)!`);
+    } else {
+      addLog(`✅ [${platform.name}] Scan completed. All ${candidates.length} items currently synced.`, 'info', platform.id);
+>>>>>>> 643a550 (supabase integration)
       toasts.info(`${platform.name}: All events are up-to-date.`);
     }
 
@@ -161,6 +222,10 @@ function createAIAgentStore() {
       isScanning: false,
       activePlatformId: null,
       activePlatformName: null,
+<<<<<<< HEAD
+=======
+      activePlatformType: null,
+>>>>>>> 643a550 (supabase integration)
       progressPercent: 100,
       agentStatus: `Scrape complete for ${platform.name}`,
       lastScanTime: timeNow,
@@ -170,13 +235,20 @@ function createAIAgentStore() {
   }
 
   /**
+<<<<<<< HEAD
    * Runs the full matrix crawl over all enabled platforms
    */
   async function runScan(customQuery = '') {
+=======
+   * Runs matrix crawl over enabled platforms (optionally filtered by category)
+   */
+  async function runScan(customQuery = '', targetCategory = 'all') {
+>>>>>>> 643a550 (supabase integration)
     const currentState = get({ subscribe });
     if (currentState.isScanning) return;
 
     const query = customQuery || currentState.searchPrompt;
+<<<<<<< HEAD
     const enabledPlatforms = currentState.platforms.filter(p => p.enabled);
 
     if (enabledPlatforms.length === 0) {
@@ -184,6 +256,27 @@ function createAIAgentStore() {
       return;
     }
 
+=======
+    let enabledPlatforms = currentState.platforms.filter(p => p.enabled);
+
+    if (targetCategory === 'hackathon') {
+      enabledPlatforms = enabledPlatforms.filter(p => p.targetType === 'hackathon');
+    } else if (targetCategory === 'tech-event') {
+      enabledPlatforms = enabledPlatforms.filter(p => p.targetType === 'tech-event');
+    }
+
+    if (enabledPlatforms.length === 0) {
+      toasts.error(`No platforms enabled for scraping. Please enable at least 1 platform.`);
+      return;
+    }
+
+    const categoryText = targetCategory === 'all'
+      ? 'All 22 Scraper Platforms (Hackathons & Tech Events)'
+      : targetCategory === 'tech-event'
+      ? '11 Tech Event Platforms (Meetups & Summits)'
+      : '11 Hackathon Platforms';
+
+>>>>>>> 643a550 (supabase integration)
     update(s => ({
       ...s,
       isScanning: true,
@@ -191,7 +284,11 @@ function createAIAgentStore() {
       agentStatus: `Initializing Web Scraper for ${enabledPlatforms.length} platforms...`
     }));
 
+<<<<<<< HEAD
     addLog(`🚀 [AI Crawler Matrix] Starting web scraper across ${enabledPlatforms.length} platforms with prompt: "${query}"`, 'info');
+=======
+    addLog(`🚀 [AI Crawler Matrix] Starting web scraper across ${enabledPlatforms.length} platforms (${categoryText}) with prompt: "${query}"`, 'info');
+>>>>>>> 643a550 (supabase integration)
 
     let totalAdded = 0;
     const currentList = get(hackathons);
@@ -199,20 +296,34 @@ function createAIAgentStore() {
 
     for (let i = 0; i < enabledPlatforms.length; i++) {
       const platform = enabledPlatforms[i];
+<<<<<<< HEAD
       const progress = Math.round(10 + ((i + 1) / enabledPlatforms.length) * 85);
+=======
+      const progress = Math.round(5 + ((i + 1) / enabledPlatforms.length) * 90);
+>>>>>>> 643a550 (supabase integration)
 
       update(s => ({
         ...s,
         activePlatformId: platform.id,
         activePlatformName: platform.name,
+<<<<<<< HEAD
+=======
+        activePlatformType: platform.targetType,
+>>>>>>> 643a550 (supabase integration)
         progressPercent: progress,
         agentStatus: `Scraping [${i + 1}/${enabledPlatforms.length}] ${platform.name} (${platform.domain})...`
       }));
 
       updatePlatformStatus(platform.id, { status: 'crawling' });
+<<<<<<< HEAD
       addLog(`🌐 [${platform.name}] Querying https://${platform.domain}${platform.endpoint} (RateLimit: ${platform.rateLimit})`, 'info', platform.id);
 
       await sleep(280);
+=======
+      addLog(`🌐 [${platform.name}] Querying https://${platform.domain}${platform.endpoint} (${platform.protocol}, RateLimit: ${platform.rateLimit})`, 'info', platform.id);
+
+      await sleep(240);
+>>>>>>> 643a550 (supabase integration)
 
       // Extract matching events for this platform
       const candidates = DISCOVERABLE_EVENTS.filter(e => e.platform === platform.id);
@@ -249,12 +360,20 @@ function createAIAgentStore() {
         itemsFound: candidates.length
       });
 
+<<<<<<< HEAD
       await sleep(150);
+=======
+      await sleep(120);
+>>>>>>> 643a550 (supabase integration)
     }
 
     if (totalAdded > 0) {
       addLog(`🎉 [AI Crawler Matrix] Full scrape completed: Ingested ${totalAdded} new opportunities across ${enabledPlatforms.length} platforms.`, 'success');
+<<<<<<< HEAD
       toasts.success(`🤖 Scrape Complete! Ingested ${totalAdded} new hackathons from ${enabledPlatforms.length} platforms.`);
+=======
+      toasts.success(`🤖 Scrape Complete! Ingested ${totalAdded} new hackathons & tech events from ${enabledPlatforms.length} platforms.`);
+>>>>>>> 643a550 (supabase integration)
     } else {
       addLog(`✅ [AI Crawler Matrix] All ${enabledPlatforms.length} platform feeds are completely up-to-date.`, 'success');
       toasts.info('AI Scraper: All enabled platforms are up-to-date.');
@@ -267,6 +386,10 @@ function createAIAgentStore() {
       isScanning: false,
       activePlatformId: null,
       activePlatformName: null,
+<<<<<<< HEAD
+=======
+      activePlatformType: null,
+>>>>>>> 643a550 (supabase integration)
       progressPercent: 100,
       agentStatus: `Scrape finished — ${enabledPlatforms.length} platforms synchronized`,
       lastScanTime: scanTime,
@@ -291,6 +414,10 @@ function createAIAgentStore() {
     scrapeSinglePlatform,
     togglePlatform,
     setAllPlatforms,
+<<<<<<< HEAD
+=======
+    setPlatformsByType,
+>>>>>>> 643a550 (supabase integration)
     clearLogs,
     addLog
   };

@@ -60,6 +60,20 @@
     if (s.includes('brightidea')) return { name: 'Brightidea', id: 'brightidea' };
     if (s.includes('bemyapp')) return { name: 'BeMyApp', id: 'bemyapp' };
     if (s.includes('stackup')) return { name: 'StackUp', id: 'stackup' };
+<<<<<<< HEAD
+=======
+    if (s.includes('jamao')) return { name: 'Jamao', id: 'jamao' };
+    if (s.includes('luma') || s.includes('lu.ma')) return { name: 'Luma', id: 'luma' };
+    if (s.includes('eventbrite')) return { name: 'Eventbrite', id: 'eventbrite' };
+    if (s.includes('allevents')) return { name: 'AllEvents', id: 'allevents' };
+    if (s.includes('maidan')) return { name: 'Maidan', id: 'maidan' };
+    if (s.includes('techmeetup')) return { name: 'TechMeetups', id: 'techmeetups' };
+    if (s.includes('startupmela')) return { name: 'StartupMelas', id: 'startupmelas' };
+    if (s.includes('eventindia')) return { name: 'EventIndia', id: 'eventindia' };
+    if (s.includes('devfest') || s.includes('devfest chennai')) return { name: 'DevFest Chennai', id: 'devfest-chennai' };
+    if (s.includes('gdg') || s.includes('gdg chennai')) return { name: 'GDG Chennai', id: 'gdg-chennai' };
+    if (s.includes('bengaluru tech week') || s.includes('tech week')) return { name: 'Bengaluru Tech Week', id: 'bengaluru-tech-week' };
+>>>>>>> 643a550 (supabase integration)
     if (item.source && item.source.includes('AI')) return { name: 'AI Crawler', id: 'ai' };
     return null;
   }

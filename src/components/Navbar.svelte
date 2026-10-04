@@ -5,11 +5,20 @@
   import { sidebarOpen, navigateTo } from '../stores/navigation.js';
   import { aiAgent } from '../stores/aiAgent.js';
   import { toasts } from '../stores/toast.js';
+<<<<<<< HEAD
+=======
+  import { dbStatus } from '../services/db.js';
+  import DatabaseModal from './DatabaseModal.svelte';
+>>>>>>> 643a550 (supabase integration)
   import Icon from './Icon.svelte';
 
   const dispatch = createEventDispatcher();
 
   let fileInputRef;
+<<<<<<< HEAD
+=======
+  let showDbModal = false;
+>>>>>>> 643a550 (supabase integration)
 
   function toggleSidebar() {
     sidebarOpen.update(val => !val);
@@ -120,6 +129,21 @@
         <span class="desktop-text">{$aiAgent.isScanning ? 'AI Scanning...' : 'AI Scout'}</span>
       </button>
 
+<<<<<<< HEAD
+=======
+      <!-- SQLite Database Status Pill Button -->
+      <button
+        class="btn-db-nav"
+        class:is-connected={$dbStatus.connected}
+        on:click={() => showDbModal = true}
+        title="SQLite Relational Database Status & Controls"
+      >
+        <span class="db-dot" class:online={$dbStatus.connected}></span>
+        <Icon name="layers" size={14} />
+        <span class="desktop-text">{$dbStatus.connected ? 'SQLite DB' : 'Local DB'}</span>
+      </button>
+
+>>>>>>> 643a550 (supabase integration)
       <div class="nav-divider"></div>
 
       <!-- Backup / Export & Restore Tools -->
@@ -171,6 +195,13 @@
   </div>
 </header>
 
+<<<<<<< HEAD
+=======
+{#if showDbModal}
+  <DatabaseModal on:close={() => showDbModal = false} />
+{/if}
+
+>>>>>>> 643a550 (supabase integration)
 <style>
   .navbar {
     background-color: var(--bg-surface);
@@ -322,6 +353,46 @@
     100% { box-shadow: 0 0 12px 2px rgba(139, 92, 246, 0.6); }
   }
 
+<<<<<<< HEAD
+=======
+  .btn-db-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.4375rem 0.6875rem;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.08);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    transition: all var(--transition-fast);
+  }
+
+  :global([data-theme="dark"]) .btn-db-nav {
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.25);
+  }
+
+  .btn-db-nav:hover {
+    background: rgba(16, 185, 129, 0.16);
+    border-color: #10b981;
+  }
+
+  .db-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f59e0b;
+    display: inline-block;
+  }
+
+  .db-dot.online {
+    background: #10b981;
+    box-shadow: 0 0 6px #10b981;
+  }
+
+>>>>>>> 643a550 (supabase integration)
   .nav-divider {
     width: 1px;
     height: 20px;

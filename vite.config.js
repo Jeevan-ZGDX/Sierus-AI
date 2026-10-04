@@ -8,5 +8,14 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+<<<<<<< HEAD
+=======
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true
+      }
+    }
+>>>>>>> 643a550 (supabase integration)
   }
 });

@@ -41,7 +41,11 @@ export function validateHackathonForm(formData) {
     const url = formData.registrationUrl.trim();
     const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/i;
     if (!urlPattern.test(url) && !url.startsWith("http://") && !url.startsWith("https://")) {
+<<<<<<< HEAD
       errors.registrationUrl = "Please enter a valid URL (e.g. https://example.com)";
+=======
+      errors.registrationUrl = "Please enter a valid URL (e.g. https://devpost.com)";
+>>>>>>> 643a550 (supabase integration)
     }
   }
 

@@ -37,6 +37,7 @@ function saveToStorage(data) {
   }
 }
 
+<<<<<<< HEAD
 function createHackathonsStore() {
   const { subscribe, set, update } = writable(loadFromStorage());
 
@@ -45,6 +46,48 @@ function createHackathonsStore() {
     addHackathon: (item) => {
       const newItem = {
         id: 'hack-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+=======
+import {
+  fetchHackathonsFromDb,
+  createHackathonInDb,
+  updateHackathonInDb,
+  deleteHackathonFromDb,
+  updateStatusInDb,
+  toggleBookmarkInDb,
+  markAllSeenInDb,
+  resetDatabaseInDb,
+  checkDatabaseHealth
+} from '../services/db.js';
+
+function createHackathonsStore() {
+  const { subscribe, set, update } = writable(loadFromStorage());
+
+  // Immediately initialize from SQLite Database if available
+  if (typeof window !== 'undefined') {
+    fetchHackathonsFromDb().then((dbItems) => {
+      if (Array.isArray(dbItems) && dbItems.length > 0) {
+        set(dbItems);
+        saveToStorage(dbItems);
+      }
+    }).catch(err => console.warn('Database initialization sync deferred:', err));
+  }
+
+  return {
+    subscribe,
+    set,
+    update,
+    syncFromDb: async () => {
+      const items = await fetchHackathonsFromDb();
+      if (Array.isArray(items)) {
+        set(items);
+        saveToStorage(items);
+      }
+      return items;
+    },
+    addHackathon: (item) => {
+      const newItem = {
+        id: item.id || 'hack-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+>>>>>>> 643a550 (supabase integration)
         bookmarked: false,
         status: item.status || 'Not Registered',
         type: item.type || 'hackathon',
@@ -56,6 +99,7 @@ function createHackathonsStore() {
         saveToStorage(updated);
         return updated;
       });
+<<<<<<< HEAD
       return newItem;
     },
     updateHackathon: (id, updates) => {
@@ -64,6 +108,28 @@ function createHackathonsStore() {
         saveToStorage(updated);
         return updated;
       });
+=======
+      // Sync to SQLite database
+      createHackathonInDb(newItem).catch(err => console.warn('SQLite write deferred:', err));
+      return newItem;
+    },
+    updateHackathon: (id, updates) => {
+      let updatedItem = null;
+      update((list) => {
+        const updated = list.map((item) => {
+          if (item.id === id) {
+            updatedItem = { ...item, ...updates };
+            return updatedItem;
+          }
+          return item;
+        });
+        saveToStorage(updated);
+        return updated;
+      });
+      if (updatedItem) {
+        updateHackathonInDb(id, updatedItem).catch(err => console.warn('SQLite update deferred:', err));
+      }
+>>>>>>> 643a550 (supabase integration)
     },
     deleteHackathon: (id) => {
       update((list) => {
@@ -71,6 +137,10 @@ function createHackathonsStore() {
         saveToStorage(updated);
         return updated;
       });
+<<<<<<< HEAD
+=======
+      deleteHackathonFromDb(id).catch(err => console.warn('SQLite delete deferred:', err));
+>>>>>>> 643a550 (supabase integration)
     },
     toggleBookmark: (id) => {
       update((list) => {
@@ -80,6 +150,10 @@ function createHackathonsStore() {
         saveToStorage(updated);
         return updated;
       });
+<<<<<<< HEAD
+=======
+      toggleBookmarkInDb(id).catch(err => console.warn('SQLite bookmark toggle deferred:', err));
+>>>>>>> 643a550 (supabase integration)
     },
     updateStatus: (id, newStatus) => {
       update((list) => {
@@ -89,6 +163,10 @@ function createHackathonsStore() {
         saveToStorage(updated);
         return updated;
       });
+<<<<<<< HEAD
+=======
+      updateStatusInDb(id, newStatus).catch(err => console.warn('SQLite status update deferred:', err));
+>>>>>>> 643a550 (supabase integration)
     },
     markAllAsSeen: () => {
       update((list) => {
@@ -96,10 +174,18 @@ function createHackathonsStore() {
         saveToStorage(updated);
         return updated;
       });
+<<<<<<< HEAD
+=======
+      markAllSeenInDb().catch(err => console.warn('SQLite mark seen deferred:', err));
+>>>>>>> 643a550 (supabase integration)
     },
     resetToSampleData: () => {
       saveToStorage(initialHackathons);
       set(initialHackathons);
+<<<<<<< HEAD
+=======
+      resetDatabaseInDb().catch(err => console.warn('SQLite reset deferred:', err));
+>>>>>>> 643a550 (supabase integration)
     },
     clearAll: () => {
       saveToStorage([]);
@@ -109,6 +195,15 @@ function createHackathonsStore() {
       if (Array.isArray(importedList)) {
         saveToStorage(importedList);
         set(importedList);
+<<<<<<< HEAD
+=======
+        // Sync to SQLite database
+        fetch('/api/db/restore', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hackathons: importedList })
+        }).catch(err => console.warn('SQLite restore deferred:', err));
+>>>>>>> 643a550 (supabase integration)
         return true;
       }
       return false;

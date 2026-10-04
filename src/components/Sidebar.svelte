@@ -48,6 +48,7 @@
         <div class="radar-info">
           <div class="radar-title-row">
             <span class="radar-title">AI Scout Spider</span>
+<<<<<<< HEAD
             <span class="radar-live-pill">11 WEBSITES</span>
           </div>
           <span class="radar-status">
@@ -55,6 +56,15 @@
               <span class="pulse-dot scanning"></span> Scraping {$aiAgent.activePlatformName || 'web platforms'}...
             {:else}
               <span class="pulse-dot idle"></span> 11 Platforms Ready
+=======
+            <span class="radar-live-pill">22 PORTALS</span>
+          </div>
+          <span class="radar-status">
+            {#if $aiAgent.isScanning}
+              <span class="pulse-dot scanning"></span> Scraping {$aiAgent.activePlatformName || 'web portals'}...
+            {:else}
+              <span class="pulse-dot idle"></span> 22 Portals Connected
+>>>>>>> 643a550 (supabase integration)
             {/if}
           </span>
         </div>
