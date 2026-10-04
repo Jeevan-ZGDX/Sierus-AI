@@ -1,13 +1,12 @@
 /**
  * SQLite Database Manager for Hackathon Tracker
- * Built with native Node.js SQLite (node:sqlite)
+ * Built with native Node.js SQLite (node:sqlite) and resilient fallback
  * 
  * Provides relational schema, transactions, migrations,
  * and high-performance querying for hackathons, tech events,
  * scraping sources, and telemetry logs.
  */
 
-import { DatabaseSync } from 'node:sqlite';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { existsSync, mkdirSync } from 'node:fs';
@@ -17,18 +16,54 @@ const __dirname = dirname(__filename);
 const DATA_DIR = join(__dirname, '..', 'data');
 const DB_FILE = join(DATA_DIR, 'hackathons.db');
 
-// Ensure data directory exists
-if (!existsSync(DATA_DIR)) {
-  mkdirSync(DATA_DIR, { recursive: true });
+// Dynamically load native node:sqlite with graceful fallback
+let DatabaseSync = null;
+let sqliteAvailable = false;
+
+try {
+  const sqliteModule = await import('node:sqlite');
+  DatabaseSync = sqliteModule.DatabaseSync || sqliteModule.default?.DatabaseSync;
+  if (DatabaseSync) {
+    sqliteAvailable = true;
+  }
+} catch (err) {
+  console.warn(
+    '[Database Warning] Native node:sqlite not available in this Node runtime:',
+    err.message,
+    '\n  (Tip: Run with "node --experimental-sqlite" or use Node >= 22.13.0). Falling back to in-memory store.'
+  );
 }
 
-// Initialize SQLite Database instance
-export const db = new DatabaseSync(DB_FILE);
+// In-memory data store for environments where node:sqlite is unavailable
+let memHackathons = [];
+let memSources = [];
+let memLogs = [];
+
+// Initialize SQLite Database instance if available
+export let db = null;
+
+if (sqliteAvailable && DatabaseSync) {
+  try {
+    if (!existsSync(DATA_DIR)) {
+      mkdirSync(DATA_DIR, { recursive: true });
+    }
+    db = new DatabaseSync(DB_FILE);
+  } catch (err) {
+    console.warn('[Database] Failed to open SQLite file, using in-memory store:', err.message);
+    db = null;
+    sqliteAvailable = false;
+  }
+}
 
 /**
  * Initialize Schema, Tables, and Indexes
  */
 export function initDatabase() {
+  if (!db) {
+    console.log('[Database] In-memory relational store initialized (Supabase primary).');
+    return;
+  }
+
   // Enable WAL mode (Write-Ahead Logging) and Foreign Keys for peak performance
   db.exec(`
     PRAGMA journal_mode = WAL;
@@ -39,11 +74,11 @@ export function initDatabase() {
     CREATE TABLE IF NOT EXISTS hackathons (
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
-      type TEXT NOT NULL DEFAULT 'hackathon', -- 'hackathon' | 'tech-event'
+      type TEXT NOT NULL DEFAULT 'hackathon',
       description TEXT,
       organizer TEXT,
       category TEXT NOT NULL,
-      mode TEXT NOT NULL DEFAULT 'Online', -- 'Online' | 'Offline' | 'Hybrid'
+      mode TEXT NOT NULL DEFAULT 'Online',
       location TEXT,
       city TEXT,
       country TEXT,
@@ -51,7 +86,7 @@ export function initDatabase() {
       event_start_date TEXT NOT NULL,
       event_end_date TEXT NOT NULL,
       registration_url TEXT,
-      status TEXT NOT NULL DEFAULT 'Not Registered', -- 'Not Registered' | 'Registered' | 'Participating' | 'Completed'
+      status TEXT NOT NULL DEFAULT 'Not Registered',
       bookmarked INTEGER NOT NULL DEFAULT 0,
       platform TEXT,
       platform_name TEXT,
@@ -111,12 +146,13 @@ export function initDatabase() {
     );
   `);
 
-  // Record initialization timestamp
-  const setInitMeta = db.prepare(`
-    INSERT INTO db_meta (key, value) VALUES ('initialized_at', datetime('now'))
-    ON CONFLICT(key) DO UPDATE SET updated_at = datetime('now');
-  `);
-  setInitMeta.run();
+  try {
+    const setInitMeta = db.prepare(`
+      INSERT INTO db_meta (key, value) VALUES ('initialized_at', datetime('now'))
+      ON CONFLICT(key) DO UPDATE SET updated_at = datetime('now');
+    `);
+    setInitMeta.run();
+  } catch (e) {}
 }
 
 /**
@@ -135,21 +171,21 @@ function rowToHackathon(row) {
     location: row.location || '',
     city: row.city || '',
     country: row.country || '',
-    registrationDeadline: row.registration_deadline,
-    eventStartDate: row.event_start_date,
-    eventEndDate: row.event_end_date,
-    registrationUrl: row.registration_url || '',
+    registrationDeadline: row.registration_deadline || row.registrationDeadline,
+    eventStartDate: row.event_start_date || row.eventStartDate,
+    eventEndDate: row.event_end_date || row.eventEndDate,
+    registrationUrl: row.registration_url || row.registrationUrl || '',
     status: row.status,
     bookmarked: Boolean(row.bookmarked),
     platform: row.platform || null,
-    platformName: row.platform_name || null,
+    platformName: row.platform_name || row.platformName || null,
     source: row.source || '',
-    discoveredAt: row.discovered_at || null,
-    prizePool: row.prize_pool || null,
-    eventType: row.event_type || null,
-    isNew: Boolean(row.is_new),
-    createdAt: row.created_at,
-    updatedAt: row.updated_at
+    discoveredAt: row.discovered_at || row.discoveredAt || null,
+    prizePool: row.prize_pool || row.prizePool || null,
+    eventType: row.event_type || row.eventType || null,
+    isNew: Boolean(row.is_new ?? row.isNew),
+    createdAt: row.created_at || row.createdAt,
+    updatedAt: row.updated_at || row.updatedAt
   };
 }
 
@@ -157,9 +193,44 @@ function rowToHackathon(row) {
  * Get all hackathons with optional filtering
  */
 export function getAllHackathons(filters = {}) {
+  if (!db) {
+    let result = [...memHackathons];
+    const isValid = (v) => v !== undefined && v !== null && v !== '' && v !== 'undefined' && v !== 'null';
+
+    if (isValid(filters.type) && filters.type !== 'all') {
+      result = result.filter(h => (h.type || 'hackathon') === filters.type);
+    }
+    if (isValid(filters.category) && filters.category !== 'All') {
+      result = result.filter(h => h.category === filters.category);
+    }
+    if (isValid(filters.mode) && filters.mode !== 'All') {
+      result = result.filter(h => h.mode === filters.mode);
+    }
+    if (isValid(filters.status) && filters.status !== 'All') {
+      result = result.filter(h => h.status === filters.status);
+    }
+    if (isValid(filters.platform) && filters.platform !== 'all') {
+      result = result.filter(h => h.platform === filters.platform);
+    }
+    if (filters.bookmarked === 'true' || filters.bookmarked === true || filters.bookmarked === 1 || filters.bookmarked === '1') {
+      result = result.filter(h => Boolean(h.bookmarked));
+    }
+    if (isValid(filters.q) && String(filters.q).trim()) {
+      const q = String(filters.q).toLowerCase().trim();
+      result = result.filter(h =>
+        (h.title && h.title.toLowerCase().includes(q)) ||
+        (h.organizer && h.organizer.toLowerCase().includes(q)) ||
+        (h.category && h.category.toLowerCase().includes(q)) ||
+        (h.city && h.city.toLowerCase().includes(q)) ||
+        (h.location && h.location.toLowerCase().includes(q))
+      );
+    }
+
+    return result.map(rowToHackathon);
+  }
+
   let query = 'SELECT * FROM hackathons WHERE 1=1';
   const params = [];
-
   const isValidParam = (v) => v !== undefined && v !== null && v !== '' && v !== 'undefined' && v !== 'null';
 
   if (isValidParam(filters.type) && filters.type !== 'all') {
@@ -203,7 +274,6 @@ export function getAllHackathons(filters = {}) {
     params.push(searchParam, searchParam, searchParam, searchParam, searchParam);
   }
 
-  // Sorting
   switch (filters.sortBy) {
     case 'deadline-asc':
       query += ' ORDER BY registration_deadline ASC';
@@ -231,6 +301,10 @@ export function getAllHackathons(filters = {}) {
  * Get single hackathon by ID
  */
 export function getHackathonById(id) {
+  if (!db) {
+    const found = memHackathons.find(h => h.id === id);
+    return rowToHackathon(found);
+  }
   const stmt = db.prepare('SELECT * FROM hackathons WHERE id = ?');
   const row = stmt.get(id);
   return rowToHackathon(row);
@@ -240,6 +314,28 @@ export function getHackathonById(id) {
  * Insert or replace hackathon
  */
 export function insertHackathon(item) {
+  if (!db) {
+    const formatted = rowToHackathon({
+      ...item,
+      registration_deadline: item.registrationDeadline || item.registration_deadline,
+      event_start_date: item.eventStartDate || item.event_start_date,
+      event_end_date: item.eventEndDate || item.event_end_date,
+      registration_url: item.registrationUrl || item.registration_url,
+      platform_name: item.platformName || item.platform_name,
+      prize_pool: item.prizePool || item.prize_pool,
+      event_type: item.eventType || item.event_type,
+      discovered_at: item.discoveredAt || item.discovered_at,
+      updated_at: new Date().toISOString()
+    });
+    const idx = memHackathons.findIndex(h => h.id === item.id);
+    if (idx >= 0) {
+      memHackathons[idx] = formatted;
+    } else {
+      memHackathons.unshift(formatted);
+    }
+    return formatted;
+  }
+
   const stmt = db.prepare(`
     INSERT INTO hackathons (
       id, title, type, description, organizer, category, mode,
@@ -289,18 +385,18 @@ export function insertHackathon(item) {
     item.location || '',
     item.city || '',
     item.country || '',
-    item.registrationDeadline,
-    item.eventStartDate,
-    item.eventEndDate,
-    item.registrationUrl || '',
+    item.registrationDeadline || item.registration_deadline,
+    item.eventStartDate || item.event_start_date,
+    item.eventEndDate || item.event_end_date,
+    item.registrationUrl || item.registration_url || '',
     item.status || 'Not Registered',
     item.bookmarked ? 1 : 0,
     item.platform || null,
-    item.platformName || null,
+    item.platformName || item.platform_name || null,
     item.source || '',
-    item.discoveredAt || null,
-    item.prizePool || null,
-    item.eventType || null,
+    item.discoveredAt || item.discovered_at || null,
+    item.prizePool || item.prize_pool || null,
+    item.eventType || item.event_type || null,
     item.isNew ? 1 : 0
   );
 
@@ -322,6 +418,10 @@ export function updateHackathon(id, data) {
  * Delete hackathon
  */
 export function deleteHackathon(id) {
+  if (!db) {
+    memHackathons = memHackathons.filter(h => h.id !== id);
+    return { success: true, id };
+  }
   const stmt = db.prepare('DELETE FROM hackathons WHERE id = ?');
   stmt.run(id);
   return { success: true, id };
@@ -331,6 +431,14 @@ export function deleteHackathon(id) {
  * Update registration status
  */
 export function updateHackathonStatus(id, newStatus) {
+  if (!db) {
+    const item = getHackathonById(id);
+    if (item) {
+      item.status = newStatus;
+      item.updatedAt = new Date().toISOString();
+    }
+    return item;
+  }
   const stmt = db.prepare(`
     UPDATE hackathons
     SET status = ?, updated_at = datetime('now')
@@ -347,6 +455,11 @@ export function toggleHackathonBookmark(id) {
   const existing = getHackathonById(id);
   if (!existing) return null;
 
+  if (!db) {
+    existing.bookmarked = !existing.bookmarked;
+    return existing;
+  }
+
   const newBookmarked = existing.bookmarked ? 0 : 1;
   const stmt = db.prepare(`
     UPDATE hackathons
@@ -361,6 +474,10 @@ export function toggleHackathonBookmark(id) {
  * Mark all as seen (clear is_new flag)
  */
 export function markAllSeen() {
+  if (!db) {
+    memHackathons.forEach(h => { h.isNew = false; });
+    return { success: true };
+  }
   const stmt = db.prepare("UPDATE hackathons SET is_new = 0 WHERE is_new = 1");
   stmt.run();
   return { success: true };
@@ -370,6 +487,11 @@ export function markAllSeen() {
  * Bulk seed hackathons into database
  */
 export function seedHackathons(items) {
+  if (!db) {
+    memHackathons = items.map(rowToHackathon);
+    return { success: true, count: items.length };
+  }
+
   db.exec('BEGIN TRANSACTION;');
   try {
     for (const item of items) {
@@ -384,27 +506,41 @@ export function seedHackathons(items) {
 }
 
 /**
- * Reset hackathons table and reseed with initial data
+ * Reset hackathons table
  */
-export function resetHackathons(initialItems) {
-  db.exec('BEGIN TRANSACTION;');
-  try {
-    db.exec('DELETE FROM hackathons;');
-    for (const item of initialItems) {
-      insertHackathon(item);
-    }
-    db.exec('COMMIT;');
-    return { success: true, count: initialItems.length };
-  } catch (err) {
-    db.exec('ROLLBACK;');
-    throw err;
+export function resetHackathons(initialList = []) {
+  if (!db) {
+    memHackathons = [];
+    return seedHackathons(initialList);
   }
+
+  db.exec('DELETE FROM hackathons;');
+  return seedHackathons(initialList);
 }
 
 /**
  * Database Telemetry & Statistics
  */
 export function getDatabaseStats() {
+  if (!db) {
+    return {
+      engine: 'In-Memory Store (Supabase Primary)',
+      dbFile: 'in-memory',
+      status: 'online',
+      integrity: 'ok',
+      counts: {
+        total: memHackathons.length,
+        hackathons: memHackathons.filter(h => h.type === 'hackathon').length,
+        techEvents: memHackathons.filter(h => h.type === 'tech-event').length,
+        registered: memHackathons.filter(h => h.status !== 'Not Registered').length,
+        notRegistered: memHackathons.filter(h => h.status === 'Not Registered').length,
+        newDiscovered: memHackathons.filter(h => h.isNew).length,
+        platforms: memSources.length,
+        logs: memLogs.length
+      }
+    };
+  }
+
   const hackathonsCountRow = db.prepare('SELECT COUNT(*) as count FROM hackathons').get();
   const registeredCountRow = db.prepare("SELECT COUNT(*) as count FROM hackathons WHERE status != 'Not Registered'").get();
   const notRegisteredCountRow = db.prepare("SELECT COUNT(*) as count FROM hackathons WHERE status = 'Not Registered'").get();
@@ -414,7 +550,6 @@ export function getDatabaseStats() {
   const logsCountRow = db.prepare('SELECT COUNT(*) as count FROM crawler_logs').get();
   const platformsCountRow = db.prepare('SELECT COUNT(*) as count FROM scraper_sources').get();
 
-  // Run integrity check
   const integrityRow = db.prepare('PRAGMA integrity_check').get();
 
   return {
@@ -439,25 +574,41 @@ export function getDatabaseStats() {
  * Crawler Logs Table Operations
  */
 export function getCrawlerLogs(limit = 100) {
+  if (!db) {
+    return memLogs.slice(0, limit);
+  }
   const stmt = db.prepare('SELECT * FROM crawler_logs ORDER BY created_at DESC LIMIT ?');
   return stmt.all(limit);
 }
 
 export function insertCrawlerLog(log) {
+  const item = {
+    id: log.id || 'log-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+    timestamp: log.timestamp || new Date().toLocaleTimeString(),
+    text: log.text,
+    type: log.type || 'info',
+    platform_id: log.platformId || null,
+    created_at: new Date().toISOString()
+  };
+
+  if (!db) {
+    memLogs.unshift(item);
+    if (memLogs.length > 200) memLogs.pop();
+    return;
+  }
+
   const stmt = db.prepare(`
     INSERT INTO crawler_logs (id, timestamp, text, type, platform_id)
     VALUES (?, ?, ?, ?, ?)
   `);
-  stmt.run(
-    log.id || 'log-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
-    log.timestamp || new Date().toLocaleTimeString(),
-    log.text,
-    log.type || 'info',
-    log.platformId || null
-  );
+  stmt.run(item.id, item.timestamp, item.text, item.type, item.platform_id);
 }
 
 export function clearCrawlerLogs() {
+  if (!db) {
+    memLogs = [];
+    return { success: true };
+  }
   db.exec('DELETE FROM crawler_logs;');
   return { success: true };
 }
@@ -466,11 +617,19 @@ export function clearCrawlerLogs() {
  * Scraper Sources Operations
  */
 export function getAllScraperSources() {
+  if (!db) {
+    return [...memSources];
+  }
   const stmt = db.prepare('SELECT * FROM scraper_sources ORDER BY target_type, name ASC');
   return stmt.all();
 }
 
 export function seedScraperSources(platforms) {
+  if (!db) {
+    memSources = [...platforms];
+    return;
+  }
+
   db.exec('BEGIN TRANSACTION;');
   try {
     const stmt = db.prepare(`
@@ -515,6 +674,13 @@ export function seedScraperSources(platforms) {
 }
 
 export function updateScraperSource(id, patch) {
+  if (!db) {
+    const existing = memSources.find(s => s.id === id);
+    if (!existing) return null;
+    Object.assign(existing, patch);
+    return existing;
+  }
+
   const existing = db.prepare('SELECT * FROM scraper_sources WHERE id = ?').get(id);
   if (!existing) return null;
 
