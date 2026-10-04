@@ -5,20 +5,14 @@
   import { sidebarOpen, navigateTo } from '../stores/navigation.js';
   import { aiAgent } from '../stores/aiAgent.js';
   import { toasts } from '../stores/toast.js';
-<<<<<<< HEAD
-=======
   import { dbStatus } from '../services/db.js';
   import DatabaseModal from './DatabaseModal.svelte';
->>>>>>> 643a550 (supabase integration)
   import Icon from './Icon.svelte';
 
   const dispatch = createEventDispatcher();
 
   let fileInputRef;
-<<<<<<< HEAD
-=======
   let showDbModal = false;
->>>>>>> 643a550 (supabase integration)
 
   function toggleSidebar() {
     sidebarOpen.update(val => !val);
@@ -129,8 +123,6 @@
         <span class="desktop-text">{$aiAgent.isScanning ? 'AI Scanning...' : 'AI Scout'}</span>
       </button>
 
-<<<<<<< HEAD
-=======
       <!-- SQLite Database Status Pill Button -->
       <button
         class="btn-db-nav"
@@ -143,7 +135,6 @@
         <span class="desktop-text">{$dbStatus.connected ? 'SQLite DB' : 'Local DB'}</span>
       </button>
 
->>>>>>> 643a550 (supabase integration)
       <div class="nav-divider"></div>
 
       <!-- Backup / Export & Restore Tools -->
@@ -195,13 +186,10 @@
   </div>
 </header>
 
-<<<<<<< HEAD
-=======
 {#if showDbModal}
   <DatabaseModal on:close={() => showDbModal = false} />
 {/if}
 
->>>>>>> 643a550 (supabase integration)
 <style>
   .navbar {
     background-color: var(--bg-surface);
@@ -353,8 +341,6 @@
     100% { box-shadow: 0 0 12px 2px rgba(139, 92, 246, 0.6); }
   }
 
-<<<<<<< HEAD
-=======
   .btn-db-nav {
     display: inline-flex;
     align-items: center;
@@ -392,7 +378,6 @@
     box-shadow: 0 0 6px #10b981;
   }
 
->>>>>>> 643a550 (supabase integration)
   .nav-divider {
     width: 1px;
     height: 20px;

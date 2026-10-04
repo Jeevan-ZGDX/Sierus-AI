@@ -6,16 +6,10 @@
 
   let customPromptInput = $aiAgent.searchPrompt;
   let selectedPlatformFilter = 'all';
-<<<<<<< HEAD
-
-  function handleStartScan() {
-    aiAgent.runScan(customPromptInput);
-=======
   let activeTab = 'all'; // 'all' | 'hackathons' | 'tech-events'
 
   function handleStartScan(targetCategory = 'all') {
     aiAgent.runScan(customPromptInput, targetCategory);
->>>>>>> 643a550 (supabase integration)
   }
 
   function handleMarkSeen() {
@@ -27,8 +21,6 @@
   }
 
   $: enabledCount = $aiAgent.platforms.filter(p => p.enabled).length;
-<<<<<<< HEAD
-=======
   $: hackathonCount = $aiAgent.platforms.filter(p => p.targetType === 'hackathon').length;
   $: techEventCount = $aiAgent.platforms.filter(p => p.targetType === 'tech-event').length;
 
@@ -38,7 +30,6 @@
     if (activeTab === 'tech-events') return p.targetType === 'tech-event';
     return true;
   });
->>>>>>> 643a550 (supabase integration)
 
   $: filteredLogs = $aiAgent.logs.filter(log => {
     if (selectedPlatformFilter === 'all') return true;
@@ -55,21 +46,12 @@
       </div>
       <div class="banner-text">
         <div class="badge-row">
-<<<<<<< HEAD
-          <span class="badge-ai">AUTONOMOUS SCOUT ENGINE</span>
-          <span class="badge-version">v2.4 Multi-Source Spider</span>
-        </div>
-        <h2 class="banner-title">Autonomous Web Scraper Matrix (11 Platforms)</h2>
-        <p class="banner-desc">
-          Continuously scrapes hackathons, developer bounties, student hackathons, and corporate open innovation challenges from <strong>Devpost, Devfolio, HackerEarth, Unstop, Reskill, Hack2Skill, MLH, HeroX, Brightidea, BeMyApp, and StackUp</strong>.
-=======
           <span class="badge-ai">AUTONOMOUS SCOUT MATRIX</span>
           <span class="badge-version">v2.4 Dual Engine (22 Portals)</span>
         </div>
         <h2 class="banner-title">Autonomous Hackathon & Tech Event Web Scraper</h2>
         <p class="banner-desc">
           Continuously scrapes hackathons from <strong>Devpost, Devfolio, HackerEarth, Unstop, Reskill, Hack2Skill, MLH, HeroX, Brightidea, BeMyApp, StackUp</strong> and tech summits/meetups from <strong>Jamao, Luma, Eventbrite, AllEvents, Maidan, TechMeetups, StartupMelas, EventIndia, GDG Chennai, DevFest Chennai, and Bengaluru Tech Week</strong>.
->>>>>>> 643a550 (supabase integration)
         </p>
       </div>
     </div>
@@ -78,11 +60,7 @@
       <button
         class="btn-primary btn-scan-large"
         disabled={$aiAgent.isScanning}
-<<<<<<< HEAD
-        on:click={handleStartScan}
-=======
         on:click={() => handleStartScan('all')}
->>>>>>> 643a550 (supabase integration)
       >
         <Icon name={$aiAgent.isScanning ? 'activity' : 'sparkles'} size={16} />
         <span>{$aiAgent.isScanning ? 'Scraping Web Feeds...' : `Scrape All ${enabledCount} Platforms`}</span>
@@ -110,21 +88,6 @@
   <div class="metrics-grid">
     <div class="metric-card">
       <span class="metric-num">{$hackathonStats.newlyDiscovered}</span>
-<<<<<<< HEAD
-      <span class="metric-lbl">DISCOVERED EVENTS</span>
-    </div>
-    <div class="metric-card">
-      <span class="metric-num text-cyan">11</span>
-      <span class="metric-lbl">SUPPORTED WEBSITES</span>
-    </div>
-    <div class="metric-card">
-      <span class="metric-num">{enabledCount} / 11</span>
-      <span class="metric-lbl">ACTIVE SCRAPERS</span>
-    </div>
-    <div class="metric-card">
-      <span class="metric-num status-online">Operational</span>
-      <span class="metric-lbl">SCRAPER STATUS</span>
-=======
       <span class="metric-lbl">DISCOVERED OPPORTUNITIES</span>
     </div>
     <div class="metric-card">
@@ -138,7 +101,6 @@
     <div class="metric-card">
       <span class="metric-num status-online">Operational</span>
       <span class="metric-lbl">SPIDER STATUS</span>
->>>>>>> 643a550 (supabase integration)
     </div>
   </div>
 
@@ -148,14 +110,6 @@
       <div class="panel-header">
         <Icon name="layers" size={18} />
         <h3 class="panel-heading">Target Websites & Live Scraper Matrix</h3>
-<<<<<<< HEAD
-        <span class="platform-count-tag">{enabledCount} Active</span>
-      </div>
-
-      <div class="platform-bulk-actions">
-        <button
-          type="button"
-=======
         <span class="platform-count-tag">{enabledCount} / 22 Active</span>
       </div>
 
@@ -183,7 +137,6 @@
         </button>
         <button
           type="button"
->>>>>>> 643a550 (supabase integration)
           class="bulk-btn"
           disabled={$aiAgent.isScanning}
           on:click={() => aiAgent.setAllPlatforms(true)}
@@ -201,15 +154,6 @@
       </div>
     </div>
 
-<<<<<<< HEAD
-    <p class="panel-sub">
-      Toggle individual websites to include/exclude from the crawler cycle or click <strong>Scrape</strong> on any platform to fetch immediately.
-    </p>
-
-    <!-- 11 Scraper Cards Grid -->
-    <div class="platforms-grid">
-      {#each $aiAgent.platforms as platform (platform.id)}
-=======
     <!-- Category Tabs Filter -->
     <div class="tab-filters-row">
       <button
@@ -240,7 +184,6 @@
     <!-- 22 Scraper Cards Grid -->
     <div class="platforms-grid">
       {#each displayedPlatforms as platform (platform.id)}
->>>>>>> 643a550 (supabase integration)
         <div
           class="platform-card"
           class:is-active={$aiAgent.activePlatformId === platform.id}
@@ -279,19 +222,12 @@
             {/if}
           </div>
 
-<<<<<<< HEAD
-          <!-- Platform Domain & Tagline -->
-          <div class="platform-domain-row">
-            <span class="platform-domain">{platform.domain}</span>
-            <span class="platform-protocol">{platform.protocol}</span>
-=======
           <!-- Platform Domain & Protocol -->
           <div class="platform-domain-row">
             <span class="platform-domain">{platform.domain}</span>
             <span class="type-pill-sm type-{platform.targetType}">
               {platform.targetType === 'tech-event' ? 'Tech Event' : 'Hackathon'}
             </span>
->>>>>>> 643a550 (supabase integration)
           </div>
           <p class="platform-desc">{platform.tagline}</p>
 
@@ -317,11 +253,7 @@
   <div class="query-panel">
     <div class="panel-header">
       <Icon name="search" size={16} />
-<<<<<<< HEAD
-      <h3 class="panel-heading">Targeted Prompt & Crawler Keywords</h3>
-=======
       <h3 class="panel-heading">Targeted Prompt & Scraper Keywords</h3>
->>>>>>> 643a550 (supabase integration)
     </div>
     <p class="panel-sub">
       Instruct the AI Scout which specific domains, programming languages, tracks, or geographic regions to prioritize.
@@ -330,11 +262,7 @@
     <div class="query-input-wrap">
       <input
         type="text"
-<<<<<<< HEAD
-        placeholder="e.g. Scrape AI, Web3, and Cloud hackathons from Devpost, Devfolio, HackerEarth and Unstop..."
-=======
         placeholder="e.g. Scrape GDG Chennai, DevFest Chennai & Bengaluru Tech Week for developer meetups and AI summits..."
->>>>>>> 643a550 (supabase integration)
         bind:value={customPromptInput}
         class="query-input"
         disabled={$aiAgent.isScanning}
@@ -342,11 +270,7 @@
       <button
         class="btn-primary"
         disabled={$aiAgent.isScanning}
-<<<<<<< HEAD
-        on:click={handleStartScan}
-=======
         on:click={() => handleStartScan('all')}
->>>>>>> 643a550 (supabase integration)
       >
         <Icon name="sparkles" size={15} />
         <span>Scrape Feeds</span>
@@ -355,17 +279,6 @@
 
     <!-- Quick Target Badges -->
     <div class="quick-prompts">
-<<<<<<< HEAD
-      <span class="quick-label">Platform Presets:</span>
-      <button
-        class="quick-pill"
-        on:click={() => {
-          customPromptInput = 'Scrape AI/ML & Agent hackathons from Devpost, HackerEarth & Reskill';
-          aiAgent.runScan(customPromptInput);
-        }}
-      >
-        🤖 Devpost + HackerEarth + Reskill (AI)
-=======
       <span class="quick-label">One-Click Presets:</span>
       <button
         class="quick-pill"
@@ -375,52 +288,28 @@
         }}
       >
         🌟 GDG Chennai + DevFest Chennai
->>>>>>> 643a550 (supabase integration)
       </button>
       <button
         class="quick-pill"
         on:click={() => {
-<<<<<<< HEAD
-          customPromptInput = 'Scrape Web3 & Blockchain bounties from Devfolio & StackUp';
-          aiAgent.runScan(customPromptInput);
-        }}
-      >
-        ⛓️ Devfolio + StackUp (Web3)
-=======
           customPromptInput = 'Scrape Bengaluru Tech Week & Luma developer salons';
           aiAgent.runScan(customPromptInput, 'tech-event');
         }}
       >
         🏙️ Bengaluru Tech Week + Luma
->>>>>>> 643a550 (supabase integration)
       </button>
       <button
         class="quick-pill"
         on:click={() => {
-<<<<<<< HEAD
-          customPromptInput = 'Scrape student & collegiate hackathons from MLH, Unstop & Hack2Skill';
-          aiAgent.runScan(customPromptInput);
-        }}
-      >
-        🎓 MLH + Unstop + Hack2Skill (Collegiate)
-=======
           customPromptInput = 'Scrape community tech meetups from Jamao, Maidan & StartupMelas';
           aiAgent.runScan(customPromptInput, 'tech-event');
         }}
       >
         👥 Jamao + Maidan + StartupMelas
->>>>>>> 643a550 (supabase integration)
       </button>
       <button
         class="quick-pill"
         on:click={() => {
-<<<<<<< HEAD
-          customPromptInput = 'Scrape enterprise challenges from HeroX, Brightidea & BeMyApp';
-          aiAgent.runScan(customPromptInput);
-        }}
-      >
-        🚀 HeroX + Brightidea + BeMyApp (Moonshots)
-=======
           customPromptInput = 'Scrape global conferences from Eventbrite, AllEvents & EventIndia';
           aiAgent.runScan(customPromptInput, 'tech-event');
         }}
@@ -435,7 +324,6 @@
         }}
       >
         🏆 Devpost + Devfolio + HackerEarth
->>>>>>> 643a550 (supabase integration)
       </button>
     </div>
   </div>
@@ -456,12 +344,6 @@
       <div class="terminal-filter-wrap">
         <label for="platform-log-select" class="filter-lbl">Source:</label>
         <select id="platform-log-select" bind:value={selectedPlatformFilter} class="term-select">
-<<<<<<< HEAD
-          <option value="all">All 11 Platforms ({$aiAgent.logs.length})</option>
-          {#each $aiAgent.platforms as p}
-            <option value={p.id}>{p.name}</option>
-          {/each}
-=======
           <option value="all">All 22 Platforms ({$aiAgent.logs.length})</option>
           <optgroup label="Tech Event Portals">
             {#each $aiAgent.platforms.filter(p => p.targetType === 'tech-event') as p}
@@ -473,7 +355,6 @@
               <option value={p.id}>{p.name}</option>
             {/each}
           </optgroup>
->>>>>>> 643a550 (supabase integration)
         </select>
       </div>
 
@@ -699,10 +580,7 @@
   }
 
   .text-cyan { color: #06b6d4; }
-<<<<<<< HEAD
-=======
   .text-purple { color: #8b5cf6; }
->>>>>>> 643a550 (supabase integration)
 
   .metric-lbl {
     font-size: 0.625rem;
@@ -765,11 +643,6 @@
     display: flex;
     align-items: center;
     gap: 0.375rem;
-<<<<<<< HEAD
-  }
-
-  .bulk-btn {
-=======
     flex-wrap: wrap;
   }
 
@@ -777,7 +650,6 @@
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
->>>>>>> 643a550 (supabase integration)
     font-size: 0.6875rem;
     font-weight: 600;
     padding: 0.25rem 0.5rem;
@@ -792,11 +664,6 @@
     color: var(--text-primary);
   }
 
-<<<<<<< HEAD
-  .panel-sub {
-    font-size: 0.8125rem;
-    color: var(--text-secondary);
-=======
   .bulk-btn.primary {
     background-color: var(--primary-50);
     color: var(--primary-600);
@@ -837,7 +704,6 @@
     background-color: var(--primary-500);
     color: #ffffff;
     border-color: var(--primary-500);
->>>>>>> 643a550 (supabase integration)
   }
 
   /* Platforms Grid */
@@ -975,11 +841,6 @@
     color: var(--text-secondary);
   }
 
-<<<<<<< HEAD
-  .platform-protocol {
-    color: var(--text-muted);
-    font-size: 0.625rem;
-=======
   .type-pill-sm {
     font-size: 0.5625rem;
     font-weight: 700;
@@ -997,7 +858,6 @@
   .type-pill-sm.type-tech-event {
     background-color: rgba(234, 88, 12, 0.12);
     color: #ea580c;
->>>>>>> 643a550 (supabase integration)
   }
 
   .platform-desc {

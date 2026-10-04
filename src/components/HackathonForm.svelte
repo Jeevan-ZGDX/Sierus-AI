@@ -293,11 +293,7 @@
         <input
           id="form-url"
           type="url"
-<<<<<<< HEAD
-          placeholder="https://example.com/event-registration"
-=======
           placeholder="https://devpost.com/hackathons/global-ai"
->>>>>>> 643a550 (supabase integration)
           bind:value={formData.registrationUrl}
           class:input-error={errors.registrationUrl}
         />

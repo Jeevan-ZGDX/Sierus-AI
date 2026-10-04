@@ -3,17 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-<<<<<<< HEAD
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+  "engines": {
+    "node": ">=22.5.0"
   },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^4.0.0",
-    "svelte": "^5.0.0",
-    "vite": "^5.4.11"
-=======
+  "scripts": {
     "dev": "concurrently -n \"db,vite\" -c \"green,blue\" \"npm run server\" \"npm run dev:client\"",
     "dev:client": "vite",
     "server": "node server/index.js",
@@ -33,6 +26,5 @@
     "cors": "^2.8.6",
     "dotenv": "^18.0.5",
     "express": "^5.2.1"
->>>>>>> 643a550 (supabase integration)
   }
 }

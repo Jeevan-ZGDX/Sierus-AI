@@ -1,23 +1,6 @@
 /**
  * AI Web Scraper Engine — Target Platforms & Live Aggregate Dataset
  * 
-<<<<<<< HEAD
- * Supported Platforms:
- * 1. Devpost (devpost.com)
- * 2. Devfolio (devfolio.co)
- * 3. HackerEarth (hackerearth.com)
- * 4. Unstop (unstop.com)
- * 5. Reskill / Reskilll (reskilll.com)
- * 6. Hack2Skill (hack2skill.com)
- * 7. MLH - Major League Hacking (mlh.io)
- * 8. HeroX (herox.com)
- * 9. Brightidea (brightidea.com)
- * 10. BeMyApp (bemyapp.com)
- * 11. StackUp (stackup.dev)
- */
-
-export const SCRAPER_PLATFORMS = [
-=======
  * 1. Competitive Hackathon Platforms (11 Platforms):
  *    - Devpost (devpost.com)
  *    - Devfolio (devfolio.co)
@@ -46,7 +29,6 @@ export const SCRAPER_PLATFORMS = [
  */
 
 export const HACKATHON_PLATFORMS = [
->>>>>>> 643a550 (supabase integration)
   {
     id: 'devpost',
     name: 'Devpost',
@@ -54,17 +36,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://devpost.com/hackathons',
     endpoint: '/api/v1/hackathons/explore',
     category: 'Global Hackathon Registry',
-<<<<<<< HEAD
-    tagline: 'World\'s largest open developer hackathon platform',
-    color: '#0086bf',
-    badgeBg: 'rgba(0, 134, 191, 0.15)',
-    badgeBorder: 'rgba(0, 134, 191, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'World\'s largest open developer hackathon platform',
     color: '#0086bf',
     badgeBg: 'rgba(0, 134, 191, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'globe',
     rateLimit: '30 req/min',
     protocol: 'REST / DOM Parser',
@@ -77,17 +52,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://devfolio.co/hackathons',
     endpoint: '/api/hackathons?filter=open',
     category: 'Web3 & Developer Community',
-<<<<<<< HEAD
-    tagline: 'Premier host for ETHIndia, Web3 & university jams',
-    color: '#3770ff',
-    badgeBg: 'rgba(55, 112, 255, 0.15)',
-    badgeBorder: 'rgba(55, 112, 255, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Premier host for ETHIndia, Web3 & university jams',
     color: '#3770ff',
     badgeBg: 'rgba(55, 112, 255, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'layers',
     rateLimit: '45 req/min',
     protocol: 'GraphQL API',
@@ -100,17 +68,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://www.hackerearth.com/challenges/hackathon/',
     endpoint: '/api/events/hackathons/active',
     category: 'Enterprise & Algorithmic Jams',
-<<<<<<< HEAD
-    tagline: 'Global enterprise coding & AI innovation challenges',
-    color: '#2b3658',
-    badgeBg: 'rgba(99, 102, 241, 0.15)',
-    badgeBorder: 'rgba(99, 102, 241, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Global enterprise coding & AI innovation challenges',
     color: '#2b3658',
     badgeBg: 'rgba(99, 102, 241, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'cpu',
     rateLimit: '25 req/min',
     protocol: 'REST / JSON Feed',
@@ -123,17 +84,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://unstop.com/hackathons',
     endpoint: '/api/public/opportunity/pl/hackathons',
     category: 'Campus & Global Tech Competitions',
-<<<<<<< HEAD
-    tagline: 'Massive engineering, AI and hiring hackathons',
-    color: '#1c4980',
-    badgeBg: 'rgba(28, 73, 128, 0.18)',
-    badgeBorder: 'rgba(28, 73, 128, 0.4)',
-=======
     targetType: 'hackathon',
     tagline: 'Massive engineering, AI and hiring hackathons',
     color: '#1c4980',
     badgeBg: 'rgba(28, 73, 128, 0.18)',
->>>>>>> 643a550 (supabase integration)
     icon: 'award',
     rateLimit: '60 req/min',
     protocol: 'Public Search API',
@@ -146,17 +100,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://reskilll.com/events',
     endpoint: '/v1/events/active/tech-hackathons',
     category: 'AI & Cloud Builder Challenges',
-<<<<<<< HEAD
-    tagline: 'Microsoft Azure, Google Cloud & Tech Community hackathons',
-    color: '#059669',
-    badgeBg: 'rgba(5, 150, 105, 0.15)',
-    badgeBorder: 'rgba(5, 150, 105, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Microsoft Azure, Google Cloud & Tech Community hackathons',
     color: '#059669',
     badgeBg: 'rgba(5, 150, 105, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'sparkles',
     rateLimit: '30 req/min',
     protocol: 'REST Webhook Stream',
@@ -169,17 +116,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://hack2skill.com/challenges',
     endpoint: '/api/challenges/feed?status=ongoing',
     category: 'Emerging Tech & GovTech Sprints',
-<<<<<<< HEAD
-    tagline: 'National innovation hackathons & deeptech challenges',
-    color: '#8b5cf6',
-    badgeBg: 'rgba(139, 92, 246, 0.15)',
-    badgeBorder: 'rgba(139, 92, 246, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'National innovation hackathons & deeptech challenges',
     color: '#8b5cf6',
     badgeBg: 'rgba(139, 92, 246, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'target',
     rateLimit: '20 req/min',
     protocol: 'JSON WebSocket Feeds',
@@ -192,17 +132,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://mlh.io/seasons/2026/events',
     endpoint: '/api/v3/seasons/2026/events',
     category: 'Major League Hacking Season',
-<<<<<<< HEAD
-    tagline: 'Official collegiate hackathon league globally',
-    color: '#e73427',
-    badgeBg: 'rgba(231, 52, 39, 0.15)',
-    badgeBorder: 'rgba(231, 52, 39, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Official collegiate hackathon league globally',
     color: '#e73427',
     badgeBg: 'rgba(231, 52, 39, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'flame',
     rateLimit: '50 req/min',
     protocol: 'Season Calendar API',
@@ -215,17 +148,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://www.herox.com/crowdsourcing-projects',
     endpoint: '/api/challenges/active?category=technology',
     category: 'Moonshots & Crowdsourced R&D',
-<<<<<<< HEAD
-    tagline: 'NASA, DARPA, and breakthrough prize competitions',
-    color: '#ea580c',
-    badgeBg: 'rgba(234, 88, 12, 0.15)',
-    badgeBorder: 'rgba(234, 88, 12, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'NASA, DARPA, and breakthrough prize competitions',
     color: '#ea580c',
     badgeBg: 'rgba(234, 88, 12, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'trophy',
     rateLimit: '15 req/min',
     protocol: 'Crowdsourcing API',
@@ -238,17 +164,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://www.brightidea.com/innovation-challenges',
     endpoint: '/api/initiatives/public/hackathons',
     category: 'Enterprise Open Innovation',
-<<<<<<< HEAD
-    tagline: 'Fortune 500 corporate hackathons & design jams',
-    color: '#ca8a04',
-    badgeBg: 'rgba(202, 138, 4, 0.15)',
-    badgeBorder: 'rgba(202, 138, 4, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Fortune 500 corporate hackathons & design jams',
     color: '#ca8a04',
     badgeBg: 'rgba(202, 138, 4, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'zap',
     rateLimit: '20 req/min',
     protocol: 'Enterprise API',
@@ -261,17 +180,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://bemyapp.com/events',
     endpoint: '/api/v2/hackathons/public',
     category: 'Automotive & Developer Summits',
-<<<<<<< HEAD
-    tagline: 'Global developer relations hackathons and incubators',
-    color: '#db2777',
-    badgeBg: 'rgba(219, 39, 119, 0.15)',
-    badgeBorder: 'rgba(219, 39, 119, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Global developer relations hackathons and incubators',
     color: '#db2777',
     badgeBg: 'rgba(219, 39, 119, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'activity',
     rateLimit: '20 req/min',
     protocol: 'Events API',
@@ -284,17 +196,10 @@ export const HACKATHON_PLATFORMS = [
     baseUrl: 'https://stackup.dev/campaigns',
     endpoint: '/api/v1/campaigns/active-quests',
     category: 'Web3 Learn-and-Earn Quests',
-<<<<<<< HEAD
-    tagline: 'Developer bounties, quests, and crypto build sprints',
-    color: '#0891b2',
-    badgeBg: 'rgba(8, 145, 178, 0.15)',
-    badgeBorder: 'rgba(8, 145, 178, 0.35)',
-=======
     targetType: 'hackathon',
     tagline: 'Developer bounties, quests, and crypto build sprints',
     color: '#0891b2',
     badgeBg: 'rgba(8, 145, 178, 0.15)',
->>>>>>> 643a550 (supabase integration)
     icon: 'terminal',
     rateLimit: '35 req/min',
     protocol: 'Web3 Quest Stream',
@@ -302,12 +207,6 @@ export const HACKATHON_PLATFORMS = [
   }
 ];
 
-<<<<<<< HEAD
-/**
- * Discoverable Events Dataset mapped to the 11 Scraper Platforms
- */
-export const DISCOVERABLE_EVENTS = [
-=======
 export const TECH_EVENT_PLATFORMS = [
   {
     id: 'jamao',
@@ -500,7 +399,6 @@ export const DISCOVERABLE_EVENTS = [
   // HACKATHON PLATFORMS (1-11)
   // ==========================================
 
->>>>>>> 643a550 (supabase integration)
   // 1. Devpost
   {
     id: "scraped-devpost-1",
@@ -655,11 +553,7 @@ export const DISCOVERABLE_EVENTS = [
     category: "IoT",
     mode: "Hybrid",
     location: "Mumbai, India & Online",
-<<<<<<< HEAD
-    city: "Bengaluru",
-=======
     city: "Mumbai",
->>>>>>> 643a550 (supabase integration)
     country: "India",
     registrationDeadline: "2026-11-05",
     eventStartDate: "2026-11-15",
@@ -755,11 +649,7 @@ export const DISCOVERABLE_EVENTS = [
     category: "Cybersecurity",
     mode: "Hybrid",
     location: "New Delhi, India & Online",
-<<<<<<< HEAD
-    city: "Bengaluru",
-=======
     city: "Delhi",
->>>>>>> 643a550 (supabase integration)
     country: "India",
     registrationDeadline: "2026-10-31",
     eventStartDate: "2026-11-06",
@@ -1035,8 +925,6 @@ export const DISCOVERABLE_EVENTS = [
     source: "StackUp Quest Stream",
     discoveredAt: "2026-10-03",
     prizePool: "$20,000"
-<<<<<<< HEAD
-=======
   },
 
   // ==========================================
@@ -1569,31 +1457,21 @@ export const DISCOVERABLE_EVENTS = [
     source: "Bengaluru Tech Week Harvester",
     discoveredAt: "2026-10-03",
     eventType: "Summit Conclave"
->>>>>>> 643a550 (supabase integration)
   }
 ];
 
 export const POPULAR_LOCATIONS = [
   "All Locations",
   "Online (Global)",
-<<<<<<< HEAD
-  "San Francisco, USA",
-  "Bengaluru, India",
-=======
   "Chennai, India",
   "Bengaluru, India",
   "San Francisco, USA",
->>>>>>> 643a550 (supabase integration)
   "London, UK",
   "Tokyo, Japan",
   "Berlin, Germany",
   "Austin, USA",
   "New York, USA",
-<<<<<<< HEAD
-  "Singapore"
-=======
   "Singapore",
   "Mumbai, India",
   "Delhi, India"
->>>>>>> 643a550 (supabase integration)
 ];

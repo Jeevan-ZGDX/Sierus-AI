@@ -382,8 +382,6 @@ textarea.input-error {
 .platform-stackup { background: rgba(8, 145, 178, 0.12); color: #0891b2; border: 1px solid rgba(8, 145, 178, 0.3); }
 .platform-ai { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
 
-<<<<<<< HEAD
-=======
 /* Tech Event Scrapers Badges */
 .platform-jamao { background: rgba(234, 88, 12, 0.12); color: #ea580c; border: 1px solid rgba(234, 88, 12, 0.3); }
 .platform-luma { background: rgba(236, 72, 153, 0.12); color: #db2777; border: 1px solid rgba(236, 72, 153, 0.3); }
@@ -397,7 +395,6 @@ textarea.input-error {
 .platform-devfest-chennai { background: rgba(66, 133, 244, 0.12); color: #2563eb; border: 1px solid rgba(66, 133, 244, 0.3); }
 .platform-bengaluru-tech-week { background: rgba(5, 150, 105, 0.12); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); }
 
->>>>>>> 643a550 (supabase integration)
 [data-theme="dark"] .platform-devpost { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
 [data-theme="dark"] .platform-devfolio { color: #60a5fa; border-color: rgba(96, 165, 250, 0.3); }
 [data-theme="dark"] .platform-hackerearth { color: #818cf8; border-color: rgba(129, 140, 248, 0.3); }
@@ -409,8 +406,6 @@ textarea.input-error {
 [data-theme="dark"] .platform-brightidea { color: #facc15; border-color: rgba(250, 204, 21, 0.3); }
 [data-theme="dark"] .platform-bemyapp { color: #f472b6; border-color: rgba(244, 114, 182, 0.3); }
 [data-theme="dark"] .platform-stackup { color: #22d3ee; border-color: rgba(34, 211, 238, 0.3); }
-<<<<<<< HEAD
-=======
 [data-theme="dark"] .platform-jamao { color: #fb923c; border-color: rgba(251, 146, 60, 0.3); }
 [data-theme="dark"] .platform-luma { color: #f472b6; border-color: rgba(244, 114, 182, 0.3); }
 [data-theme="dark"] .platform-eventbrite { color: #ff6b57; border-color: rgba(255, 107, 87, 0.3); }
@@ -422,7 +417,6 @@ textarea.input-error {
 [data-theme="dark"] .platform-gdg-chennai { color: #f87171; border-color: rgba(248, 113, 113, 0.3); }
 [data-theme="dark"] .platform-devfest-chennai { color: #93c5fd; border-color: rgba(147, 197, 253, 0.3); }
 [data-theme="dark"] .platform-bengaluru-tech-week { color: #6ee7b7; border-color: rgba(110, 231, 183, 0.3); }
->>>>>>> 643a550 (supabase integration)
 
 /* Status Badges */
 .status-not-registered {

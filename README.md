@@ -42,7 +42,7 @@ A production-ready, responsive web application built with **Svelte** and **Vite*
 - **Styling**: Modern CSS with CSS Custom Properties, Flexbox & CSS Grid
 - **Icons**: Accessible custom SVG icon suite
 - **Storage**: Browser `localStorage` API
-- **Deployment**: Vercel, Netlify, GitHub Pages, Docker / Nginx
+- **Deployment**: Render, Vercel, Docker / Node.js 22
 
 ---
 
@@ -67,7 +67,6 @@ npm run build
 
 ## 🌐 Production Deployment
 
-- **Vercel**: Pre-configured with [vercel.json](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/vercel.json)
-- **Netlify**: Pre-configured with [netlify.toml](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/netlify.toml)
-- **GitHub Pages**: Automated workflow in [.github/workflows/deploy.yml](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/.github/workflows/deploy.yml)
-- **Docker**: Containerized with [Dockerfile](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/Dockerfile) and [nginx.conf](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/nginx.conf)
+- **Render (Recommended)**: Pre-configured fullstack web service with [render.yaml](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/render.yaml)
+- **Docker**: Containerized Node 22 fullstack image with [Dockerfile](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/Dockerfile)
+- **Vercel**: Static build with [vercel.json](file:///run/media/vampire/68F2C653F2C62562/volume/svelte-project/vercel.json)

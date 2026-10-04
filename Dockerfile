@@ -1,20 +1,23 @@
-# Build stage
-FROM node:20-alpine AS build
+# Production Dockerfile for Fullstack Hackathon Tracker
+# Runs Express REST API + Svelte Frontend + SQLite & Supabase integration
+FROM node:22-alpine
 
 WORKDIR /app
 
+# Install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm ci --omit=dev || npm install
 
+# Copy source code and build frontend
 COPY . .
 RUN npm run build
 
-# Production serve stage with NGINX
-FROM nginx:alpine
+# Set environment
+ENV NODE_ENV=production
+ENV PORT=10000
 
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Expose Render standard port
+EXPOSE 10000
 
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Start fullstack Express server
+CMD ["node", "server/index.js"]
