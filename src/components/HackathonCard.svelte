@@ -4,6 +4,7 @@
   import { toasts } from '../stores/toast.js';
   import { formatDisplayDate, formatDateRange, getDeadlineStatus } from '../utils/dateUtils.js';
   import { FORM_STATUSES } from '../data/sampleHackathons.js';
+  import { getVerifiedEventUrl } from '../utils/urlHelper.js';
   import Icon from './Icon.svelte';
 
   export let hackathon;
@@ -208,17 +209,15 @@
 
     <!-- Actions -->
     <div class="card-actions">
-      {#if hackathon.registrationUrl}
-        <a
-          href={hackathon.registrationUrl.startsWith('http') ? hackathon.registrationUrl : `https://${hackathon.registrationUrl}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-icon"
-          title="Open Official Website"
-        >
-          <Icon name="external-link" size={14} />
-        </a>
-      {/if}
+      <a
+        href={getVerifiedEventUrl(hackathon)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-icon"
+        title={`Open Official Registration (${hackathon.platformName || 'Platform'})`}
+      >
+        <Icon name="external-link" size={14} />
+      </a>
 
       <button
         class="btn-icon"

@@ -1,6 +1,7 @@
 import { writable, derived } from 'svelte/store';
 import { initialHackathons } from '../data/sampleHackathons.js';
 import { getDeadlineStatus } from '../utils/dateUtils.js';
+import { getVerifiedEventUrl } from '../utils/urlHelper.js';
 
 const STORAGE_KEY = 'hackathons_v1';
 
@@ -15,7 +16,10 @@ function loadFromStorage() {
     }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+      return parsed.map(item => ({
+        ...item,
+        registrationUrl: getVerifiedEventUrl(item)
+      }));
     }
     if (Array.isArray(parsed)) {
       return parsed;
@@ -56,8 +60,12 @@ function createHackathonsStore() {
   if (typeof window !== 'undefined') {
     fetchHackathonsFromDb().then((dbItems) => {
       if (Array.isArray(dbItems) && dbItems.length > 0) {
-        set(dbItems);
-        saveToStorage(dbItems);
+        const verified = dbItems.map(item => ({
+          ...item,
+          registrationUrl: getVerifiedEventUrl(item)
+        }));
+        set(verified);
+        saveToStorage(verified);
       }
     }).catch(err => console.warn('Database initialization sync deferred:', err));
   }
@@ -69,8 +77,13 @@ function createHackathonsStore() {
     syncFromDb: async () => {
       const items = await fetchHackathonsFromDb();
       if (Array.isArray(items)) {
-        set(items);
-        saveToStorage(items);
+        const verified = items.map(item => ({
+          ...item,
+          registrationUrl: getVerifiedEventUrl(item)
+        }));
+        set(verified);
+        saveToStorage(verified);
+        return verified;
       }
       return items;
     },
@@ -81,7 +94,8 @@ function createHackathonsStore() {
         status: item.status || 'Not Registered',
         type: item.type || 'hackathon',
         location: item.location || (item.mode === 'Online' ? 'Online' : 'Location TBD'),
-        ...item
+        ...item,
+        registrationUrl: getVerifiedEventUrl(item)
       };
       update((list) => {
         const updated = [newItem, ...list];

@@ -4,6 +4,7 @@
   import { toasts } from '../stores/toast.js';
   import { formatDisplayDate, formatDateRange, getDeadlineStatus } from '../utils/dateUtils.js';
   import { FORM_STATUSES } from '../data/sampleHackathons.js';
+  import { getVerifiedEventUrl, getPlatformPortalUrl } from '../utils/urlHelper.js';
   import Icon from './Icon.svelte';
 
   export let hackathon;
@@ -220,20 +221,18 @@
         {/if}
 
         <!-- Registration Link Section -->
-        {#if currentHackathon.registrationUrl}
-          <div class="url-section">
-            <h4 class="section-title">Official Link</h4>
-            <a
-              href={currentHackathon.registrationUrl.startsWith('http') ? currentHackathon.registrationUrl : `https://${currentHackathon.registrationUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="reg-url-link"
-            >
-              <span>{currentHackathon.registrationUrl}</span>
-              <Icon name="external-link" size={14} />
-            </a>
-          </div>
-        {/if}
+        <div class="url-section">
+          <h4 class="section-title">Official Link</h4>
+          <a
+            href={getVerifiedEventUrl(currentHackathon)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="reg-url-link"
+          >
+            <span>{getVerifiedEventUrl(currentHackathon)}</span>
+            <Icon name="external-link" size={14} />
+          </a>
+        </div>
       </div>
 
       <!-- Modal Footer -->
@@ -263,21 +262,15 @@
             <span>Edit</span>
           </button>
 
-          {#if currentHackathon.registrationUrl}
-            <a
-              href={currentHackathon.registrationUrl.startsWith('http') ? currentHackathon.registrationUrl : `https://${currentHackathon.registrationUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-primary"
-            >
-              <Icon name="external-link" size={15} />
-              <span>Official Site</span>
-            </a>
-          {:else}
-            <button class="btn-primary" on:click={() => dispatch('close')}>
-              <span>Done</span>
-            </button>
-          {/if}
+          <a
+            href={getVerifiedEventUrl(currentHackathon)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            <Icon name="external-link" size={15} />
+            <span>{currentHackathon.platformName ? `Register on ${currentHackathon.platformName}` : 'Official Registration'}</span>
+          </a>
         </div>
       </div>
     </div>
